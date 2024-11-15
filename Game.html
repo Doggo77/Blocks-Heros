@@ -4338,7 +4338,11 @@ let Gemswitch12 = true;
 let Gemswitch13 = true;
 let Gemswitch14 = true;
 
-
+const password = prompt("Bitte Passwort eingeben:");
+  if (password !== "FürKoi") {
+    document.body.innerHTML = "Falsches Passwort";
+  }
+	
 function updateGem() {
 	  document.querySelectorAll(".showGem").forEach((element, index) => {
 	  element.textContent = "Edelstein der Stärke: " + DamageGem;
