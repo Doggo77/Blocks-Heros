@@ -109,19 +109,29 @@ position: absolute;
 
   .sword {
     position: absolute;
-    width: 40px;
-    height: 100px;
+    width: 30px;
+    height: 120px;
     background-color: gray;
+  }
+  
+  .sword::before {
+  content: "";
+  position: absolute;
+  top: 80px;
+  left: -30%;
+  width: 50px;
+  height: 10px;
+  background-color: gray;
   }
 
   .black-block .sword {
     right: 30px;
-    top: -20px;
+    top: -40px;
   }
 
   .red-block .sword {
     left: 30px;
-    top: -20px;
+    top: -40px;
   }
   
   table, th, td {
@@ -222,6 +232,7 @@ position: absolute;
 .slash {
 animation: slash 1s ease-in-out;
 }
+
 
 @keyframes moveBack5 {
     0% { left: 350px; }
@@ -521,14 +532,23 @@ animation: behindback 1s ease-in-out;
 		
 		#shopSword {
 		position: absolute;
-		width: 50px;
+		width: 30px;
 		height: 120px;
 		top: 60px;
 		right: 1460px;
 		background-color: gray;
-		border-radius: 10px;
 		box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
 		cursor: pointer;
+}
+
+#shopSword::before {
+content: "";
+position: absolute;
+top: 80px;
+left: -30%;
+width: 50px;
+height: 10px;
+background-color: gray;
 }
 		
 		.sword-container:hover .tooltip {
@@ -577,6 +597,16 @@ padding: 15px;
     height: 200px;
     background-color: gray;
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+  }
+  
+  .sword3::before {
+  content: "";
+  position: absolute;
+  top: 120px;
+  left: -32%;
+  width: 100px;
+  height: 20px;
+  background-color: gray;
   }
   
   .Boss-block {
@@ -1020,7 +1050,7 @@ padding: 15px;
 		
 		.red-block .Poisensword {
 		left: 30px;
-		top: -20px;
+		top: -40px;
 		}
 		
 		.red-block .Magiestabklein {
@@ -1030,13 +1060,22 @@ padding: 15px;
 		
 		.Bleedshop {
 		position: absolute;
-		width: 50px;
+		width: 30px;
 		height: 120px;
 		top: 60px;
 		right: 960px;
 		background-color: gray;
 		box-shadow: 0 0 10px rgba(255, 51, 49, 0.8), 0 0 20px rgba(255, 51, 49, 0.6), 0 0 30px rgba(255, 51, 49, 0.4);
+		}
 		
+		.Bleedshop::before {
+		content: "";
+		position: absolute;
+		top: 80px;
+		left: -30%;
+		width: 50px;
+		height: 10px;
+		background-color: gray;
 		}
 		
 		.bleed-container:hover .tooltip {
@@ -1272,6 +1311,7 @@ padding: 15px;
 		height: 150px;
 		transform: rotate(90deg);
 		position: absolute;
+		background-color: gray;
 		}
 		
 		.speer::before {
@@ -2507,10 +2547,20 @@ box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.2);
 
 .Poisensword {
 position: absolute;
-width: 40px;
-height: 100px;
+width: 30px;
+height: 120px;
 background-color: gray;
 box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.2);
+}
+
+.Poisensword::before {
+content: "";
+position: absolute;
+top: 80px;
+left: -30%;
+width: 50px;
+height: 10px;
+background-color: gray;
 }
 
 .Magiestabklein {
@@ -2649,29 +2699,65 @@ animation: swordanimation2 1s ease-in-out;
 
 .animationssword {
 width: 120px;
-height: 300px;
+height: 480px;
 background-color: gray;
+}
+
+.animationssword::before {
+content: "";
+  position: absolute;
+  top: 70%;
+  left: -30%;
+  width: 200px;
+  height: 40px;
+  background-color: gray;
 }
 
 .animationssword2 {
 width: 120px;
-height: 300px;
+height: 480px;
 background-color: gray;
+}
+
+.animationssword2::before {
+content: "";
+  position: absolute;
+  top: 70%;
+  left: -30%;
+  width: 200px;
+  height: 40px;
+  background-color: gray;
 }
 
 .animationsblock .animationssword {
 position: absolute;
-top: -20%;
-left: 30%;
+top: -60%;
+left: 40%;
 }
 
 .animationsblock2 .animationssword2 {
 position: absolute;
-top: -20%;
-right: 30%;
+top: -60%;
+right: 40%;
 }
 
+.ausrufezeichen {
+position: absolute;
+width: 10px;
+height: 50px;
+background-color: red;
+}
 
+.ausrufezeichen::before {
+content: "";
+position: absolute;
+width: 10px;
+height: 10px;
+top: 60px;
+left: 0;
+background-color: red;
+border-radius: 50px;
+}
 </style>
 </head>
 <body id="background">
@@ -2862,7 +2948,8 @@ right: 30%;
 
 <button class="button4" onclick="Equipment()">Ausrüstung</button>
 <button class="button3" id="howtoplay" onclick="tutorial()">How to Play</button>
-<button class="button" onclick="Go()">Start</button>
+<div id="SpielezuerstdasTutorial" style="position: absolute; left: 820px; top: 350px; font-size: 30px;">Spiele zuerst das Tutorial</div>
+<button id="Start" class="button" onclick="Go()" disabled>Start</button>
 <div class="arrow hidden" id="Pfeil">
 <div style="width: 90px; position: absolute; top: -60px; left: -20px; animation: upanddown 1s infinite">Du hast eine Talentpunkt</div>
 </div>
@@ -2871,6 +2958,14 @@ right: 30%;
 <p class="Gold" id="Gold">Gold: 0</p>
 
 <div id="newSurface" class="new-surface">
+<div class="speech-bubble2 hidden" id="speech-bubble66" style="z-index: 100000000">Willkommen zum Block tutorial.<button onclick="Weiter('Weiter61')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble67" style="z-index: 100000000">hier lernst du wie du richtig Blocks.<button onclick="Weiter('Weiter62')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble68" style="z-index: 100000000">Es ist ganz einfach im Schwierigkeitsgrad Normal und Easy wird dir immer angezeigt wenn die blocken musst.<button onclick="Weiter('Weiter63')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble69" style="z-index: 100000000">Du musst einfach nur auf Verteidigen drücken wenn du ein rotes Ausrufezeichen siehst so wie das: <div class="ausrufezeichen" style="top: 10px; left: 400px;"></div><button onclick="Weiter('Weiter64')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble70" style="z-index: 100000000">Beim Schwierigkeitsgrad Hard musst du abschätzen wann du blocken musst.<button onclick="Weiter('Weiter65')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble71" style="z-index: 100000000">Schaff es den Gegner 3 mal zu blocken.<button onclick="Weiter('Weiter66')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble72" style="z-index: 100000000">0 / 3</div>
+<div class="speech-bubble2 hidden" id="speech-bubble73" style="z-index: 100000000">Das wars mit dem tutorial ich hoffe du weißst jetzt wie du ordentlich blockst.<button onclick="Weiter('Weiter')">Weiter</button></div>
 <div class="totem hidden" id="totem">
 <div class="augen"></div>
 </div>
@@ -2889,6 +2984,7 @@ right: 30%;
 <div class="hidden" id="crit2" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: rgb(255, 165, 0);">critical</div>
 <div class="number hidden" id="damage" style=" top: 190px; left: 640px; font-size: 30px;"></div>
 <div class="hidden" id="Fireball" style="top: 200px; right: 1250px;"></div>
+<div id="blocken" class="hidden ausrufezeichen" style="top: 120px; left: 440px;"></div>
   <div class="block red-block" id="redBlock">
   <div class="name">You</div>
     <div class="sword" id="sword"></div><br>
@@ -3030,7 +3126,7 @@ right: 30%;
 			<div class="Heart-hover"></div>
 		</div>
 		<div class="sword-container">
-    <div class="sword3" id="shopSword">
+    <div class="" id="shopSword">
         <div class="tooltip" id="shoptxt2">(Schärfen) Der Angriff wird um 1 erhöht (100 Gold)</div>
         <button class="buy-button" id="buyButton2" onclick="buy('buyButton2')">Kaufen</button>
     </div>
@@ -3927,6 +4023,18 @@ right: 30%;
 </div>
 </div>
 
+<div id="newSurface11" class="new-surface">
+<div class="popup" id="difficulty">
+<div>Wähle deinen Schwierigkeitsgrad</div>
+<button onclick="Easy = true; losgehts()">Easy</button>
+<div>Die Blockzeit ist erhöht, Gegner erhalten 1 Leben pro Level und vorwarnung beim Block</div>
+<button onclick="Normal = true; losgehts()">Normal</button>
+<div>Die Blockzeit ist Normal, Gegner erhalten 1 Leben pro Level und vorwarnung beim Block</div>
+<button onclick="Hard = true; losgehts()">Hard</button>
+<div>Die Blockzeit ist Normal, Gegner erhalten 2 Leben pro Level und keine vorwarnung beim Block</div>
+</div>
+</div>
+
 <div class="popup4" id="TreePopup">
   <button onclick="back()">back</button>
   <div id="talentpoints"></div>
@@ -4065,9 +4173,8 @@ right: 30%;
   <div>Willkommen bei Blocks Hero's</div><br>
   <div>1. Map aufbau:<br><br>Es gibt eine Knopf unten der Start heist, drück ihn um ins nächste Level zu kommen, dann siehst du auch noch einen Talentbaum Knopf, da kannst du Talente Freischalten um stärker zu werden und einen Knopf wo Ausrüstung steht da kannst du deine Ausrüstung ausrüsten.</div><br>
   <div>2. Kampf System:<br><br>Das Kampf System ist ganz simpel. Du hast 4 Knöpfe (Angriff, Spell, Verteidigen und items)<br>Angriff: Wenn du Angreiffen willst drückst du einfach den Angriffs Knopf (Macht Physischen Schaden).
-  <br>Spell: Später im Spiel erhählst du Zauber die du mit dem Knopf wirken kannst (Macht Magischen Schaden).<br>Verteidigen: Natürlich kann der Gegner auch angreiffen, deshalb gibt es den Verteidigen Knopf. 
-  Das bedeutet wenn du im richtigen moment den Knopf drückst erhählst du kein Schaden.
-  <br>item: Der Knopf ist dein Rucksack, das bedeutet Heiltränke und anderes Zeug ist dort zu finden.</div><br>
+  <br>Spell: Später im Spiel erhählst du Zauber die du mit dem Knopf wirken kannst (Macht Magischen Schaden).<br>Verteidigen: mit dem Knopf blocks du Gegnerische Angriffe (Hier gib es ein Tutorial dazu das du Spielen musst <button id="buttonzumtutorial" onclick="blocktutorial()">Tutorial</button>).
+  <br>Item: Der Knopf ist dein Rucksack, das bedeutet Heiltränke und anderes Zeug ist dort zu finden.</div><br>
   <div>3. Events:<br><br>Es gibt Events bei manchen Level, wo du in eine Szene eintauchst und entscheidest was passiert. In Events kannst du auch Material sammeln indem du sie anklickst</div><br>
   <div>4. shop:<br><br>Es gibt auch einen shop, wo du dir Ausrüstung, Tränke und Material kaufen kannst.</div><br>
   <div>5. Crafting:<br><br>Das Spiel hat ein Crafting System, das bedeute du kannst dir Ausrüstungen oder allgemeine verstärkungen craften mit den Materialen die du findest oder von Gegnern gedropt werden.</div><br>
@@ -4102,6 +4209,16 @@ let button_1 = 0;
 let button_2 = 0;
 let button_3 = 0;
 let Healing = 1;
+let timer = 0;
+let btutorial = false;
+let durchgelesen = 0;
+let tutorialblock = 0;
+
+
+//Schwierigkeitsgrad
+let Hard = false;
+let Normal = true;
+let Easy = false;
 
 //Level
 let level = 1;
@@ -4291,9 +4408,9 @@ let switchcraft15 = true;
 let switchcraft16 = true;
 
 //Gem
-let MagicDamageGem = 2;
-let DamageGem = 2;
-let HeartGem = 2;
+let MagicDamageGem = 0;
+let DamageGem = 0;
+let HeartGem = 0;
 let Gemequip1 = 0;
 let Gemart = 0;
 let BleedGem = 0;
@@ -4338,11 +4455,65 @@ let Gemswitch12 = true;
 let Gemswitch13 = true;
 let Gemswitch14 = true;
 
-const password = prompt("Bitte Passwort eingeben:");
-  if (password !== "FürKoi") {
-    document.body.innerHTML = "Falsches Passwort";
-  }
-	
+function blocktutorial() {
+btutorial = true;
+tutorialblock = 0;
+document.getElementById("tutorialPopup").style.display = 'none';
+document.getElementById("newSurface").style.display = 'block';
+document.getElementById("Bleed").classList.add("hidden");
+	  document.getElementById("hidden").classList.add("hidden");
+      document.getElementById("header").classList.add("hidden");
+      document.getElementById("dots").classList.add("hidden");
+      document.getElementById("myAnimation").classList.add("hidden");
+      document.querySelector(".button").classList.add("hidden");
+	  document.getElementById("ball").classList.add("hidden");
+	  document.getElementById("wayContainer").classList.add("hidden");
+document.getElementById("blackBlock").classList.add("black-block");
+document.getElementById("blackBlock").classList.add("block");
+document.getElementById("sword2").classList.add("sword");
+document.getElementById("speech-bubble66").classList.remove("hidden");
+document.getElementById("buttonzumtutorial").disabled = true;
+document.getElementById("SpielezuerstdasTutorial").classList.add("hidden");
+}
+
+function weitertutorial() {
+if (durchgelesen == 1) {
+document.getElementById("hidden").classList.remove("hidden");
+c = 0;
+currentHp += 9999;
+checkDamage();
+}
+}
+
+if (progress == 0 && roundcount == 0) {
+document.getElementById("newSurface11").style.display = 'block';
+document.getElementById("difficulty").style.display = 'block';
+document.getElementById("Bleed").classList.add("hidden");
+	  document.getElementById("hidden2").classList.remove("hidden");
+      document.getElementById("header").classList.add("hidden");
+      document.getElementById("dots").classList.add("hidden");
+      document.getElementById("myAnimation").classList.add("hidden");
+      document.querySelector(".button").classList.add("hidden");
+	  document.getElementById("ball").classList.add("hidden");
+	  document.getElementById("wayContainer").classList.add("hidden");
+}
+
+function losgehts() {
+console.log("Schwierigkeitsgrad Hard = " + Hard)
+console.log("Schwierigkeitsgrad Normal = " + Normal)
+console.log("Schwierigkeitsgrad Easy = " + Easy)
+document.getElementById("newSurface11").style.display = 'none';
+document.getElementById("difficulty").style.display = 'none';
+document.getElementById("Bleed").classList.remove("hidden");
+	  document.getElementById("hidden2").classList.remove("hidden");
+      document.getElementById("header").classList.remove("hidden");
+      document.getElementById("dots").classList.remove("hidden");
+      document.getElementById("myAnimation").classList.remove("hidden");
+      document.querySelector(".button").classList.remove("hidden");
+	  document.getElementById("ball").classList.remove("hidden");
+	  document.getElementById("wayContainer").classList.remove("hidden");
+}
+
 function updateGem() {
 	  document.querySelectorAll(".showGem").forEach((element, index) => {
 	  element.textContent = "Edelstein der Stärke: " + DamageGem;
@@ -4531,6 +4702,7 @@ console.log(currentGold)
 	  document.getElementById("blackBlock").classList.remove("black-block");
 	  document.getElementById("blackBlock").classList.add("green-block");
 	  document.getElementById("sword2").classList.add("speer");
+	  document.getElementById("sword2").classList.remove("sword");
 	  document.getElementById("statsblock").classList.remove("hidden");
 	  if (roundcount >= 1) {
 	  document.getElementById("redBlock3").style.left = "90px";
@@ -5400,7 +5572,12 @@ function aiAction(remindercrit_chance) {
   var attack_name = document.getElementById("name");
   var chance = getRandomChance();
   if (roundcount >= 2 && progress != 6 && progress != 13) {
+  //Dungel Gegner
   attack_name.innerHTML = "Gift Speer";
+  setTimeout (() => {
+  document.getElementById("blocken").classList.remove("hidden");
+  }, 400);
+  setTimeout (() => {
   sword2.classList.add("slash");
   if (yousummon == 0) {
 	  if (!defending) {
@@ -5473,11 +5650,18 @@ function aiAction(remindercrit_chance) {
           sword2.classList.remove("slash");
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  document.getElementById("blocken").classList.add("hidden");
         }, 1000);
+		}, 1000);
   } else if (roundcount >= 2 && progress == 6) {
+  //Dungel Boss
   if (action > 0.5) {
   console.log(action)
   attack_name.innerHTML = "Gift Speer";
+  setTimeout (() => {
+  document.getElementById("blocken").classList.remove("hidden");
+  }, 500);
+  setTimeout (() => {
   sword2.classList.add("slash");
   if (yousummon == 0) {
 	  if (!defending) {
@@ -5550,7 +5734,9 @@ function aiAction(remindercrit_chance) {
           sword2.classList.remove("slash");
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  document.getElementById("blocken").classList.add("hidden");
         }, 1000);
+		}, 1000);
 	} else {
 	attack_name.innerHTML = "Gift Pflanzen";
 	document.getElementById("flower").classList.remove("hidden");
@@ -5659,8 +5845,20 @@ function aiAction(remindercrit_chance) {
   // Großer Boss
         if (action > 0.4) {
 		attack_name.innerHTML = "Slash";
+		if (Easy == true) {
+timer = 81;
+} else if (Normal == true) {
+timer = 131;
+} else if (Hard == true) {
+timer = -1;
+}
   id = setInterval(frame2, 1);
   function frame2() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
    if (pos2 == 400) {
       clearInterval(id);
       sword2.classList.add("swing2");
@@ -5862,8 +6060,20 @@ currentHp2 += 2;
   // normaler Gegner
 } else {
 attack_name.innerHTML = "Slash";
+if (Easy == true) {
+timer = 121;
+} else if (Normal == true) {
+timer = 171;
+} else if (Hard == true) {
+timer = -1;
+}
 	id = setInterval(frame4, 1);
   function frame4() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
     if (pos2 == 440) {
       clearInterval(id);
       sword2.classList.add("swing2");
@@ -5885,6 +6095,24 @@ attack_name.innerHTML = "Slash";
         hpElement.innerHTML = currentHp + " Hp";
 		checkDamage();
 		checkdefeat();
+		}
+		} else {
+		if (btutorial == true) {
+		if (tutorialblock == 0) {
+		document.getElementById("speech-bubble72").innerHTML = "1 / 3";
+		tutorialblock = 1;
+		} else if (tutorialblock == 1) {
+		document.getElementById("speech-bubble72").innerHTML = "2 / 3";
+		tutorialblock = 2;
+		} else if (tutorialblock == 2) {
+		document.getElementById("speech-bubble72").innerHTML = "3 / 3";
+		document.getElementById("speech-bubble72").classList.add("hidden");
+		document.getElementById("speech-bubble73").classList.remove("hidden");
+		tutorialblock = 0;
+		btutorial = false;
+		document.getElementById("Start").disabled = false;
+		c = 1;
+		}
 		}
 		}
 		} else {
@@ -5936,6 +6164,7 @@ attack_name.innerHTML = "Slash";
           sword2.classList.remove("swing2");
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  document.getElementById("blocken").classList.add("hidden");
         }, 1000);
       }, 500);
     } else {
@@ -5948,8 +6177,21 @@ attack_name.innerHTML = "Slash";
   } else {
   attack_name.innerHTML = "Dopple stitch";
   if (action < 0.5) {
+  if (Easy == true) {
+timer = 31;
+} else if (Normal == true) {
+timer = 81;
+} else if (Hard == true) {
+timer = -1;
+}
   id = setInterval(frame5, 1);
   function frame5() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  defend();
+  }
    if (pos2 == 350) {
       clearInterval(id);
       sword2.classList.add("slash");
@@ -6038,6 +6280,15 @@ attack_name.innerHTML = "Slash";
   setTimeout(() => {
   elem2.classList.add("behind");
   }, 100);
+  if (Normal == true) {
+  setTimeout (() => {
+  document.getElementById("blocken").classList.remove("hidden");
+  }, 700);
+  } else if (Easy == true) {
+  setTimeout (() => {
+  document.getElementById("blocken").classList.remove("hidden");
+  }, 500);
+  }
   setTimeout (() => {
   document.getElementById("blackBlock").classList.remove("hidden");
   sword2.classList.add("slash");
@@ -6103,6 +6354,7 @@ attack_name.innerHTML = "Slash";
 		}
 	  }
 	  }
+	  document.getElementById("blocken").classList.add("hidden");
   }, 1100);
   setTimeout(() => {
         elem2.classList.remove("behind");
@@ -6133,8 +6385,20 @@ attack_name.innerHTML = "Slash";
   //Summon Gegner
   if (summon == 1) {
   attack_name.innerHTML = "Slash";
+  if (Easy == true) {
+timer = 121;
+} else if (Normal == true) {
+timer = 171;
+} else if (Hard == true) {
+timer = -1;
+}
   id = setInterval(frame8, 1);
   function frame8() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
     if (pos2 == 440) {
       clearInterval(id);
       sword4.classList.add("swing2");
@@ -6287,8 +6551,20 @@ attack_name.innerHTML = "Slash";
 	  attack_name.innerHTML = "Wasserball";
       wand.classList.add("swing3");
 	  document.getElementById("ball").classList.remove("hidden");
+	  if (Easy == true) {
+timer = 271;
+} else if (Normal == true) {
+timer = 321;
+} else if (Hard == true) {
+timer = -1;
+}
 	  id = setInterval(frame7, 1);
   function frame7() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
     if (pos2 == 590) {
       clearInterval(id);
 	  document.getElementById("ball").classList.add("hidden");
@@ -6428,10 +6704,11 @@ attack_name.innerHTML = "Slash";
           wand.classList.remove("swing3");
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  document.getElementById("hidden2").classList.remove("hidden");
         }, 1000);
     
     
-	document.getElementById("hidden2").classList.remove("hidden");
+	
 	}
   } else if (action > 0.7) {
 	console.log(action);
@@ -6469,8 +6746,20 @@ attack_name.innerHTML = "Slash";
 	  attack_name.innerHTML = "Wasserball";
       wand.classList.add("swing3");
 	  document.getElementById("ball").classList.remove("hidden");
+	  if (Easy == true) {
+timer = 271;
+} else if (Normal == true) {
+timer = 321;
+} else if (Hard == true) {
+timer = -1;
+}
 	  id = setInterval(frame7, 1);
   function frame7() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
     if (pos2 == 590) {
       clearInterval(id);
 	  document.getElementById("ball").classList.add("hidden");
@@ -6546,9 +6835,6 @@ attack_name.innerHTML = "Slash";
 		  document.getElementById("redBlock").classList.add("highlight");
 		  document.getElementById("hidden2").classList.remove("hidden");
         }, 1000);
-    
-    
-	document.getElementById("hidden2").classList.remove("hidden");
 	}
   }
 	}
@@ -6562,8 +6848,21 @@ attack_name.innerHTML = "Slash";
 	  attack_name.innerHTML = "Wasserball";
       wand.classList.add("swing3");
 	  document.getElementById("ball").classList.remove("hidden");
+	  if (Easy == true) {
+timer = 171;
+} else if (Normal == true) {
+timer = 221;
+} else if (Hard == true) {
+timer = -1;
+}
 	  id = setInterval(frame7, 1);
   function frame7() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  defend();
+  }
     if (pos2 == 590) {
       clearInterval(id);
 	  document.getElementById("ball").classList.add("hidden");
@@ -6862,7 +7161,12 @@ burntime--;
  
 function defend() {
   defending = true;
+  if (Hard == true || Normal == true) {
+  setTimeout(() => defending = false, 300); // Defend for 0,3 second
+  } else if (Easy == true) {
   setTimeout(() => defending = false, 500); // Defend for 0,5 second
+  }
+  document.getElementById("blocken").classList.add("hidden");
 }
 
 function checkdefeat() {
@@ -7067,7 +7371,9 @@ function nextLevel() {
     document.getElementById("victoryPopup").style.display = 'none';
     // Show the game area and reset the game
     document.getElementById("newSurface").style.display = 'none';
+	if (Hard == true) {
     resetGame();
+	}
     // Show all waypoints
 	
     //document.querySelectorAll('.way').forEach(waypoint => {
@@ -9003,6 +9309,7 @@ document.querySelectorAll('.stone3').forEach(el => el.classList.remove('hidden')
 document.querySelectorAll('.eisenbarren').forEach(el => el.classList.remove('hidden'));
 document.getElementById("header").classList.remove("hidden");
       document.getElementById("dots").classList.remove("hidden");
+	  document.getElementById("speech-bubble73").classList.add("hidden");
 	  if (progress >= 14) {
 	  document.getElementById("myAnimation2").classList.remove("hidden");
 	  } else {
@@ -9575,7 +9882,32 @@ document.getElementById("statue").classList.add("hidden");
 document.getElementById("speech-bubble63a").classList.add("hidden");
 document.getElementById("speech-bubble64a").classList.remove("hidden");
 
-}
+} else if (WeiterId === 'Weiter61') {
+document.getElementById("speech-bubble66").classList.add("hidden");
+document.getElementById("speech-bubble67").classList.remove("hidden");
+
+} else if (WeiterId === 'Weiter62') {
+document.getElementById("speech-bubble67").classList.add("hidden");
+document.getElementById("speech-bubble68").classList.remove("hidden");
+
+} else if (WeiterId === 'Weiter63') {
+document.getElementById("speech-bubble68").classList.add("hidden");
+document.getElementById("speech-bubble69").classList.remove("hidden");
+
+} else if (WeiterId === 'Weiter64') {
+document.getElementById("speech-bubble69").classList.add("hidden");
+document.getElementById("speech-bubble70").classList.remove("hidden");
+
+} else if (WeiterId === 'Weiter65') {
+document.getElementById("speech-bubble70").classList.add("hidden");
+document.getElementById("speech-bubble71").classList.remove("hidden");
+
+} else if (WeiterId === 'Weiter66') {
+document.getElementById("speech-bubble71").classList.add("hidden");
+document.getElementById("speech-bubble72").classList.remove("hidden");
+durchgelesen = 1;
+weitertutorial();
+} 
 }
 
 function backpack() {
@@ -11607,6 +11939,8 @@ document.getElementById("totem").classList.add("hidden");
 summontotem--;
 aiAction();
 }
+
+
 
 </script>
 
