@@ -118,10 +118,11 @@ position: absolute;
   content: "";
   position: absolute;
   top: 80px;
-  left: -30%;
+  left: -32%;
   width: 50px;
   height: 10px;
   background-color: gray;
+  border: solid 1px black;
   }
 
   .black-block .sword {
@@ -331,7 +332,7 @@ animation: behindback 1s ease-in-out;
   
    .shop {
             background-color: brown;
-            height: 100vh;
+            height: 200vh;
             width: 100%;
             position: absolute;
             top: 70%;
@@ -365,8 +366,8 @@ animation: behindback 1s ease-in-out;
   
        .Heart {
             position: absolute;
-            top: 0;
-            right: 1760px;
+            top: 10px;
+            left: 70px;
             width: 100px;
             height: 90px;
             margin: 10px; /* Optional: Abstand von den Rändern */
@@ -459,7 +460,6 @@ animation: behindback 1s ease-in-out;
 		width: 100%;
 		height: 400px;
 		background-color: rgb(75, 125, 255);
-		
 		}
 		
 		.speech-bubble {
@@ -535,7 +535,7 @@ animation: behindback 1s ease-in-out;
 		width: 30px;
 		height: 120px;
 		top: 60px;
-		right: 1460px;
+		left: 400px;
 		background-color: gray;
 		box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
 		cursor: pointer;
@@ -607,6 +607,7 @@ padding: 15px;
   width: 100px;
   height: 20px;
   background-color: gray;
+  border: solid 1px black;
   }
   
   .Boss-block {
@@ -702,8 +703,8 @@ padding: 15px;
 
 .bottle {
             position: absolute;
-			top: 50px;
-			left: 600px;
+			top: 670px;
+			left: 100px;
             width: 100px;
             height: 200px;
             background-color: #008080;
@@ -733,6 +734,55 @@ padding: 15px;
             background-color: #ffffff;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+		
+		.abottle {
+		position: absolute;
+			top: 670px;
+			left: 400px;
+            width: 100px;
+            height: 200px;
+            background-color: rgb(255, 55, 0);
+            border-radius: 50px 50px 10px 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .abottle:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 60px;
+            height: 30px;
+            background-color: rgb(255, 55, 0);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .abottle:after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 35px;
+            width: 30px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+		
+		.abottle-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+		
+		.abottle-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px; /* Matches heart width */
+            height: 120px; /* Matches heart height */
+            z-index: 0; /* Ensure it is under the heart */
         }
 		
 		.#buyButton3 {
@@ -1062,8 +1112,8 @@ padding: 15px;
 		position: absolute;
 		width: 30px;
 		height: 120px;
-		top: 60px;
-		right: 960px;
+		top: 400px;
+		left: 100px;
 		background-color: gray;
 		box-shadow: 0 0 10px rgba(255, 51, 49, 0.8), 0 0 20px rgba(255, 51, 49, 0.6), 0 0 30px rgba(255, 51, 49, 0.4);
 		}
@@ -1076,6 +1126,7 @@ padding: 15px;
 		width: 50px;
 		height: 10px;
 		background-color: gray;
+		border: solid 1px black;
 		}
 		
 		.bleed-container:hover .tooltip {
@@ -1534,8 +1585,8 @@ position: absolute;
 
 #fishing-rod {
             position: absolute;
-			top: 50px;
-			left: 1200px;
+			top: 1680px;
+			left: 200px;
             width: 50px;
             height: 100px;
         }
@@ -1714,8 +1765,8 @@ animation: stonethrow 1.0s ease-in-out;
             border-radius: 50%;
             border: 5px solid gold;
             position: absolute;
-			left: 1500px;
-			top: 20px;
+			left: 50px;
+			top: 1270px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
@@ -1750,8 +1801,8 @@ animation: stonethrow 1.0s ease-in-out;
 		width: 100px;
 		height: 100px;
 		position: absolute;
-		right: 240px;
-		top: 400px;
+		left: 100px;
+		top: 1000px;
 		background-color: rgb(149, 152, 139);
 		}
 		
@@ -2349,8 +2400,8 @@ border-radius: 5px;
 
 .book {
 position: relative;
-top: 350px;
-left: 1100px;
+top: 50px;
+left: 600px;
 width: 300px;
 height: 170px;
 background-color: #8B4513;
@@ -2498,7 +2549,7 @@ left: 155px;
 .Magiestab {
 position: relative;
 top: 380px;
-left: 900px;
+left: 400px;
 width: 40px;
 height: 170px;
 background-color: #8B4513;
@@ -2711,6 +2762,7 @@ content: "";
   width: 200px;
   height: 40px;
   background-color: gray;
+  border: solid 1px black;
 }
 
 .animationssword2 {
@@ -2727,6 +2779,7 @@ content: "";
   width: 200px;
   height: 40px;
   background-color: gray;
+  border: solid 1px black;
 }
 
 .animationsblock .animationssword {
@@ -2743,20 +2796,27 @@ right: 40%;
 
 .ausrufezeichen {
 position: absolute;
-width: 10px;
-height: 50px;
+width: 50px;
+height: 200px;
 background-color: red;
 }
 
 .ausrufezeichen::before {
 content: "";
 position: absolute;
-width: 10px;
-height: 10px;
-top: 60px;
+width: 50px;
+height: 50px;
+top: 250px;
 left: 0;
 background-color: red;
 border-radius: 50px;
+}
+
+.linen {
+position: absolute;
+width: 100%;
+height: 1px;
+background-color: black;
 }
 </style>
 </head>
@@ -2948,8 +3008,10 @@ border-radius: 50px;
 
 <button class="button4" onclick="Equipment()">Ausrüstung</button>
 <button class="button3" id="howtoplay" onclick="tutorial()">How to Play</button>
-<div id="SpielezuerstdasTutorial" style="position: absolute; left: 820px; top: 350px; font-size: 30px;">Spiele zuerst das Tutorial</div>
-<button id="Start" class="button" onclick="Go()" disabled>Start</button>
+<div class="arrow hidden" id="SpielezuerstdasTutorial" style="right: 1500px;">
+<div style="position: absolute; left: -20px; top: -80px;">Spiele zuerst das Tutorial</div>
+</div>
+<button id="Start" class="button" onclick="Go()" >Start</button>
 <div class="arrow hidden" id="Pfeil">
 <div style="width: 90px; position: absolute; top: -60px; left: -20px; animation: upanddown 1s infinite">Du hast eine Talentpunkt</div>
 </div>
@@ -2959,9 +3021,9 @@ border-radius: 50px;
 
 <div id="newSurface" class="new-surface">
 <div class="speech-bubble2 hidden" id="speech-bubble66" style="z-index: 100000000">Willkommen zum Block tutorial.<button onclick="Weiter('Weiter61')">Weiter</button></div>
-<div class="speech-bubble2 hidden" id="speech-bubble67" style="z-index: 100000000">hier lernst du wie du richtig Blocks.<button onclick="Weiter('Weiter62')">Weiter</button></div>
-<div class="speech-bubble2 hidden" id="speech-bubble68" style="z-index: 100000000">Es ist ganz einfach im Schwierigkeitsgrad Normal und Easy wird dir immer angezeigt wenn die blocken musst.<button onclick="Weiter('Weiter63')">Weiter</button></div>
-<div class="speech-bubble2 hidden" id="speech-bubble69" style="z-index: 100000000">Du musst einfach nur auf Verteidigen drücken wenn du ein rotes Ausrufezeichen siehst so wie das: <div class="ausrufezeichen" style="top: 10px; left: 400px;"></div><button onclick="Weiter('Weiter64')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble67" style="z-index: 100000000">hier lernst du wie du richtig Blockst.<button onclick="Weiter('Weiter62')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble68" style="z-index: 100000000">Es ist ganz einfach im Schwierigkeitsgrad Normal und Easy wird dir immer angezeigt wenn du blocken musst.<button onclick="Weiter('Weiter63')">Weiter</button></div>
+<div class="speech-bubble2 hidden" id="speech-bubble69" style="z-index: 100000000">Du musst einfach nur auf Verteidigen drücken wenn du ein rotes Ausrufezeichen siehst so wie das: <div class="ausrufezeichen" style="top: -300px; left: 150px;"></div><button onclick="Weiter('Weiter64')">Weiter</button></div>
 <div class="speech-bubble2 hidden" id="speech-bubble70" style="z-index: 100000000">Beim Schwierigkeitsgrad Hard musst du abschätzen wann du blocken musst.<button onclick="Weiter('Weiter65')">Weiter</button></div>
 <div class="speech-bubble2 hidden" id="speech-bubble71" style="z-index: 100000000">Schaff es den Gegner 3 mal zu blocken.<button onclick="Weiter('Weiter66')">Weiter</button></div>
 <div class="speech-bubble2 hidden" id="speech-bubble72" style="z-index: 100000000">0 / 3</div>
@@ -2981,10 +3043,11 @@ border-radius: 50px;
 <div class="hidden" id="crittxt" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: rgb(255, 165, 0);">Crit erhöht</div>
 <div class="hidden" id="Regenerationtxt" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: green;">Regeneration</div>
 <div class="hidden" id="angry" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: rgb(255, 0, 0);">Wütent</div>
+<div class="hidden" id="Schadenerhöht" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: rgb(255, 165, 0);">Schaden erhöht</div>
 <div class="hidden" id="crit2" style=" position: absolute; top: 190px; left: 540px; font-size: 30px; color: rgb(255, 165, 0);">critical</div>
 <div class="number hidden" id="damage" style=" top: 190px; left: 640px; font-size: 30px;"></div>
 <div class="hidden" id="Fireball" style="top: 200px; right: 1250px;"></div>
-<div id="blocken" class="hidden ausrufezeichen" style="top: 120px; left: 440px;"></div>
+<div id="blocken" class="hidden ausrufezeichen" style="top: 150px; left: 920px;"></div>
   <div class="block red-block" id="redBlock">
   <div class="name">You</div>
     <div class="sword" id="sword"></div><br>
@@ -3077,8 +3140,15 @@ border-radius: 50px;
   <button onclick="back()">Back</button>
   <div class="bottle-container">
 <div class="bottle" id="backpackbottle" style="left: 20px; top: 70px">
-<div class="tooltip">(Block Wasser) Heil dich um 3 Leben (100 Gold)</div>
+<div class="tooltip">(Block Wasser) Heil dich um 3 Leben</div>
 <button class="buy-button" id="useButton3" onclick="Heal()">Use</button>
+</div>
+<div class="bottle-hover"></div>
+</div>
+<div class="abottle-container">
+<div class="abottle" id="backpackbottle2" style="left: 220px; top: 70px">
+<div class="tooltip">(Rotes Block Wasser) Erhöht dein Schaden um 2 bin zum Ende des Kampfes</div>
+<button class="buy-button" id="useButton4" onclick="Damagefc()">Use</button>
 </div>
 <div class="bottle-hover"></div>
 </div>
@@ -3118,6 +3188,12 @@ border-radius: 50px;
 <button id="door" class="door" onclick="Weiter('Weiter')">Verlassen</button>
 <button id="switchbutton2" class="next" onclick="shopswitch('item')">Items</button>
 	<div id="shop" class="shop">
+		<div class="linen" style="font-size: 20px;">Unendliche Verstärkungen</div>
+		<div class="linen" style="top: 300px; font-size: 20px;">Waffen</div>
+		<div class="linen" style="top: 600px; font-size: 20px;">Tränke</div>
+		<div class="linen" style="top: 950px; font-size: 20px;">Spells</div>
+		<div class="linen" style="top: 1200px; font-size: 20px;">Ausrüstung</div>
+		<div class="linen" style="top: 1600px; font-size: 20px;">Event Items</div>
 		<div class="Heart-container">
 			<div id="heart" class="Heart">
 				<div class="tooltip" id="shoptxt">Das Leben wird um 1 erhöht (50 Gold)</div>
@@ -3126,7 +3202,7 @@ border-radius: 50px;
 			<div class="Heart-hover"></div>
 		</div>
 		<div class="sword-container">
-    <div class="" id="shopSword">
+    <div class="shopSword" id="shopSword">
         <div class="tooltip" id="shoptxt2">(Schärfen) Der Angriff wird um 1 erhöht (100 Gold)</div>
         <button class="buy-button" id="buyButton2" onclick="buy('buyButton2')">Kaufen</button>
     </div>
@@ -3154,7 +3230,7 @@ border-radius: 50px;
 	<div class="rod-hover"></div>
 	</div>
 	<div class="fireball-container" id="fireball-container">
-	<div class="fireball" id="fireball" style="top: 90px; left: 1350px;">
+	<div class="fireball" id="fireball" style="top: 1020px; left: 400px;">
 	<div class="tooltip">(Spell) Verschießt eine Feuerball auf Gegner (150 Gold)</div>
 	<button class="buy-button" id="buyButton6" onclick="buy('buyButton6')">Kaufen</button>
 	</div>
@@ -3199,6 +3275,13 @@ border-radius: 50px;
 	<button class="buy-button" id="buyButton13" onclick="buy('buyButton13')">Kaufen</button>
 	</div>
 	<div class="Magiestab-hover"></div>
+	</div>
+	<div class="abottle-container" id="abottle-container" style="height: 0px;">
+	<div class="abottle" id="abottle">
+	<div class="tooltip">(Rotes Block Wasser) Ein Trank der dein Schaden um 2 erhöht (100 Gold)</div>
+	<button class="buy-button" id="buyButton14" onclick="buy('buyButton14')">Kaufen</button>
+	</div>
+	<div class="abottle-hover"></div>
 	</div>
 	</div>
 	<button id="switchbutton" class="prev hidden" onclick="shopswitch('itemback')">Ausrüstung</button>
@@ -4024,6 +4107,15 @@ border-radius: 50px;
 </div>
 
 <div id="newSurface11" class="new-surface">
+<div class="popup" id="commingsoon" style="top: 100px;">
+<div>coming soon:</div>
+<div>Mehr Talente</div>
+<div>Töne z.b: Schlag sound, Kauf sound, ...</div>
+<div>Welt 4</div>
+<div>Mehr Ausrüstung</div>
+<div>Mehr Zauber</div>
+<div>Mehr Waffen</div>
+</div>
 <div class="popup" id="difficulty">
 <div>Wähle deinen Schwierigkeitsgrad</div>
 <button onclick="Easy = true; losgehts()">Easy</button>
@@ -4076,7 +4168,7 @@ border-radius: 50px;
   <td><button id="button2" onclick="buttontalent('talent_id18')" disabled>Erhöht dein Magie und deine Maximalen Hp um 2</button></td>
   </tr>
   <tr>
-  <th style="padding: 10px;">comming soon</th>
+  <th style="padding: 10px;">coming soon</th>
   <td><button disabled></button></td>
   <td><button disabled></button></td>
   <td><button disabled></button></td>
@@ -4214,7 +4306,6 @@ let btutorial = false;
 let durchgelesen = 0;
 let tutorialblock = 0;
 
-
 //Schwierigkeitsgrad
 let Hard = false;
 let Normal = false;
@@ -4223,7 +4314,7 @@ let Easy = false;
 //Level
 let level = 1;
 const maxLevels = 100;
-var progress = 0; //fortschritt
+var progress = 3; //fortschritt
 
 //rounds
 let score = 0;
@@ -4242,7 +4333,8 @@ let rod = 0;
 let coin = 0;
 let ring = 0;
 let Key = 0;
-let Blockwater = 0;
+let Blockwater = 1;
+let RBlockwater = 1;
 
 //Gold
 let goldElement = document.getElementById('Gold');
@@ -4280,6 +4372,7 @@ let Regeneration = 0;
 let RegenerationTime = 0;
 let Bleeding = 0; 
 let BleedingTime = 0;
+let Damagebuff = 0;
 
 //HP
 var hp4Element = document.getElementById("Hp4");
@@ -4501,6 +4594,7 @@ document.getElementById("Bleed").classList.add("hidden");
       document.querySelector(".button").classList.add("hidden");
 	  document.getElementById("ball").classList.add("hidden");
 	  document.getElementById("wayContainer").classList.add("hidden");
+	  document.getElementById("commingsoon").style.display = 'block';
 }
 
 function losgehts() {
@@ -4517,6 +4611,7 @@ document.getElementById("Bleed").classList.remove("hidden");
       document.querySelector(".button").classList.remove("hidden");
 	  document.getElementById("ball").classList.remove("hidden");
 	  document.getElementById("wayContainer").classList.remove("hidden");
+	  document.getElementById("SpielezuerstdasTutorial").classList.remove("hidden");
 }
 
 function updateGem() {
@@ -5205,7 +5300,10 @@ buff = 0;
     poisen = 0;
     summon = 0;
     yousummon = 0;
-	
+	if (Damagebuff == 1) {
+	c -= 2;
+	Damagebuff = 0;
+	}
 	
 checkMaterial();
 	
@@ -5267,13 +5365,19 @@ checkDamage();
 
 function onetimeuse() {
 if (!(Blockwater == 1)){
-
-document.getElementById("backpackbottle").classList.add("hidden")
+document.getElementById("backpackbottle").classList.add("hidden");
 }
 if (Blockwater == 1) {
   document.getElementById("hidden2").classList.remove("hidden");
-  document.getElementById("backpackbottle").classList.remove("hidden")
+  document.getElementById("backpackbottle").classList.remove("hidden");
   }
+if (!(RBlockwater == 1)) {
+document.getElementById("backpackbottle2").classList.add("hidden");
+}
+if (RBlockwater == 1) {
+  document.getElementById("hidden2").classList.remove("hidden");
+  document.getElementById("backpackbottle2").classList.remove("hidden")
+}  
 }
 
 function attack() {
@@ -5284,7 +5388,7 @@ var zweiterangriffswert = c;
     var chance = getRandomChance();
 	var remindercrit_chance;
 	remindercrit_chance = crit_chance;
-	if (Magicwandequip == 1) {
+	if (Magicwandequip == 1 || Firewandequip == 1) {
 	c = MagicDamage;
 	console.log("Angriff = " + c)
 	MagicDamageon = true;
@@ -6979,11 +7083,17 @@ timer = -1;
   if (Damageboost == 2 || Damageboost == 3 || Damageboost == 4) {
   Damageboost--;
   } else if (Damageboost == 1) {
+  if (MagicDamageon == false) {
   c--;
   c--;
+  } else {
+  MagicDamage -= 2;
+  }
   Damageboost--;
   }
+  setTimeout (() => {
   document.getElementById("hidden").classList.remove("hidden");
+  }, 1500);
   if (summon == 1) {
   checksummon();
   }
@@ -7425,6 +7535,24 @@ function nextLevel() {
                 useButton3.style.display = 'block'; // Zeigt den Kaufen-Button an
             } else {
                 useButton3.style.display = 'none'; // Versteckt den Kaufen-Button
+            }
+        });
+		
+		document.querySelector('#abottle').addEventListener('click', function() {
+            var buyButton14 = document.getElementById('buyButton14');
+            if (buyButton14.style.display === 'none' || buyButton14.style.display === '') {
+                buyButton14.style.display = 'block'; // Zeigt den Kaufen-Button an
+            } else {
+                buyButton14.style.display = 'none'; // Versteckt den Kaufen-Button
+            }
+        });
+		
+		document.querySelector('#backpackbottle2').addEventListener('click', function() {
+            var useButton4 = document.getElementById('useButton4');
+            if (useButton4.style.display === 'none' || useButton4.style.display === '') {
+                useButton4.style.display = 'block'; // Zeigt den Kaufen-Button an
+            } else {
+                useButton4.style.display = 'none'; // Versteckt den Kaufen-Button
             }
         });
 		
@@ -9285,7 +9413,14 @@ if (selectednumber3 === 'holz') {
         } else {
             alert("Nicht genug Gold!");
         }
-    }
+    } else if (buttonId === 'buyButton14') {
+        if (currentGold >= 100) { // Überprüfe, ob genug Gold vorhanden ist
+            updateGold(-100);
+           RBlockwater++;
+        } else {
+            alert("Nicht genug Gold!");
+        }
+    } 
 }
 
 function Weiter(WeiterId) {
@@ -9933,8 +10068,12 @@ updateGold(+25);
 }
 if (talent12_unlock == 1) {
 Damageboost = 4;
+if (MagicDamageon == false) {
 c++;
 c++;
+} else {
+MagicDamage += 2;
+}
 document.getElementById("angry").classList.add("damage-animation");
 document.getElementById("angry").classList.remove("hidden");
 setTimeout (() => {
@@ -9945,6 +10084,20 @@ document.getElementById("angry").classList.add("hidden");
 hpElement.innerHTML = currentHp + " Hp";
 checkDamage();
 Blockwater--;
+onetimeuse();
+}
+
+function Damagefc() {
+c += 2;
+document.getElementById("statsattack").innerHTML = c + " Angriffs Stärke";
+document.getElementById("Schadenerhöht").classList.add("damage-animation");
+document.getElementById("Schadenerhöht").classList.remove("hidden");
+setTimeout (() => {
+document.getElementById("Schadenerhöht").classList.remove("damage-animation");
+document.getElementById("Schadenerhöht").classList.add("hidden");
+}, 1000);
+Damagebuff = 1;
+RBlockwater--;
 onetimeuse();
 }
 
@@ -10027,6 +10180,7 @@ currentHp2 -= 2 + MagicDamage;
 hp2Element.innerHTML = currentHp2 + " Hp";
 }
 checkDamage();
+burntime++;
 burn++;
 spellTime2 = 2;
 turn2 = 2;
@@ -10035,6 +10189,7 @@ spellTimer();
 currentHp3 -= 2 + MagicDamage;
 hp3Element.innerHTML = currentHp3 + " Hp";
 checkDamage();
+burntime++;
 burn++;
 }
 document.getElementById("spellPopup").style.display = 'none';
@@ -11944,7 +12099,6 @@ document.getElementById("totem").classList.add("hidden");
 summontotem--;
 aiAction();
 }
-
 
 
 </script>
