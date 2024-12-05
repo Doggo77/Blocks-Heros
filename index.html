@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!--<audio autoplay loop>
+<source src="" type="audio/mpeg">
+</audio>-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block Hero's</title>
@@ -324,8 +327,8 @@ animation: behindback 1s ease-in-out;
   
   .Gold {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1%;
+    right: 0.5%;
     font-size: 20px;
     font-weight: bold;
   }
@@ -549,6 +552,7 @@ left: -30%;
 width: 50px;
 height: 10px;
 background-color: gray;
+border: solid 1px black;
 }
 		
 		.sword-container:hover .tooltip {
@@ -1380,6 +1384,7 @@ padding: 15px;
 		}
 		
 		.schamanenwand {
+		position: absolute;
 		height: 200px;
 		width: 20px;
 		background-color: rgb(163, 89, 0);
@@ -3051,7 +3056,7 @@ background-color: black;
   <div class="block red-block" id="redBlock">
   <div class="name">You</div>
     <div class="sword" id="sword"></div><br>
-    <div class="Hp" id="Hp">5 Hp</div>
+    <div class="Hp" id="Hp">5 / 5 >Hp</div>
   </div>
 <div class="hidden" id="poisenttxt3" style=" position: absolute; top: 390px; left: 540px; font-size: 30px; color: rgb(156, 255, 15);">Gift</div>
 <div class="hidden" id="crittxt3" style=" position: absolute; top: 390px; left: 540px; font-size: 30px; color: rgb(255, 165, 0);">Crit erhöht</div>
@@ -3085,7 +3090,7 @@ background-color: black;
     </div>
     <div id="sword2" class="sword"></div>
 	<div id="sword3"></div>
-    <div class="Hp2" id="Hp2">3 Hp</div>
+    <div class="Hp2" id="Hp2">3 / 3 Hp</div>
   </div>
   <div class="statsblock" id="statsblock">
   <table style="top: 0px; font-size: 20px;">
@@ -4123,6 +4128,7 @@ background-color: black;
 <div>Mehr Ausrüstung</div>
 <div>Mehr Zauber</div>
 <div>Mehr Waffen</div>
+<div>Neues Schwert Design</div>
 </div>
 <div class="popup" id="difficulty">
 <div>Wähle deinen Schwierigkeitsgrad</div>
@@ -4281,6 +4287,7 @@ background-color: black;
   <div>6. Gems:<br><br>Gem sind Edelstein die deine Ausrüstung verstärken. Sie können von Gegner gedropt werden und du kannt sie in der Schmiede einbauen.</div><br>
   <div>7. Schmiede:<br><br>In der Schmiede kannst Gems ausrüsten, jede ausrüstung kann nur ein Gem ausrüsten (außer accessorys die können keinen Gems tragen), und achte darauf sie können nicht mehr geändert werden!</div><br>
   <div>8. Schadentpyen:<br><br>Es gibt Magischen Schaden und Physischen Schaden.<br> Magischen Schaden: Du fügst diesen Schaden mit Zauberstäben oder Zaubern zu und ist gut gegen nicht Magische Gegner.<br>Physischen Schaden: Du fügst diesen Schaden mit Schwertern zu und ist gut gegen Magische Gegner.</div><br>
+  <div>9. Zusatz Info:<br><br>Wenn sich welten wiederholen ist das Normal das gehört zum Game.</div><br>
 </div>
 
 <div id="victoryPopup" class="popup">
@@ -4294,7 +4301,7 @@ background-color: black;
 
 <div id="gegnerwahl" class="popup">
 <div>Wähle aus</div>
-<button onclick="attackgegner()">Boss Angreiffen</button>
+<button onclick="attackgegner1 = true, attack()">Boss Angreiffen</button>
 <button onclick="zerstöre_totem()">Totem Zerstören</button>
 </div>
 
@@ -4313,6 +4320,7 @@ let timer = 0;
 let btutorial = false;
 let durchgelesen = 0;
 let tutorialblock = 0;
+let attackgegner1 = false;
 
 //Schwierigkeitsgrad
 let Hard = false;
@@ -4603,7 +4611,7 @@ document.getElementById("Bleed").classList.add("hidden");
 	  document.getElementById("ball").classList.add("hidden");
 	  document.getElementById("wayContainer").classList.add("hidden");
 	  document.getElementById("commingsoon").style.display = 'block';
-	document.getElementById("updatelog").style.display = 'block';
+	  document.getElementById("updatelog").style.display = 'block';
 }
 
 function losgehts() {
@@ -5307,6 +5315,7 @@ buff = 0;
     Regeneration = 0;
     RegenerationTime = 0;
     poisen = 0;
+	poisen2 = 0;
     summon = 0;
     yousummon = 0;
 	if (Damagebuff == 1) {
@@ -5364,11 +5373,10 @@ if (yousummon == 1) {
 yousummon--;
 }
 currentHp = y;
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 currentHp2 = x;
-hp2Element.innerHTML = currentHp2  + " Hp"
+hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
 document.getElementById("hidden").classList.remove("hidden");
-x++;
 checkDamage();
 }
 
@@ -5407,8 +5415,12 @@ var zweiterangriffswert = c;
 	}
     document.getElementById("hidden").classList.add("hidden");
 	console.log(yousummon)
+	if (attackgegner1 == false) {
 	if (summontotem == 1) {
 	document.getElementById("gegnerwahl").style.display = 'block';
+	} else {
+	attackgegner();
+	}
 	} else {
 	attackgegner();
 	}
@@ -5475,8 +5487,8 @@ var zweiterangriffswert = c;
             currentHp2 -= c;  // Schaden anwenden
 			}
 			}
-            hp2Element.innerHTML = currentHp2 + " Hp";  // HP-Wert aktualisieren
-            hpElement.innerHTML = currentHp + " Hp";
+            hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";  // HP-Wert aktualisieren
+            hpElement.innerHTML = currentHp + "/" + y + " Hp";
             console.log("Attack - currentHp2:", currentHp2);  // Debug-Ausgabe
             
             checkDamage(); 			// Überprüfen und anzeigen von Schaden
@@ -5507,8 +5519,8 @@ var zweiterangriffswert = c;
 			}
 			currentHp3 -= c;
 			}
-			hp3Element.innerHTML = currentHp3 + " Hp";
-			hpElement.innerHTML = currentHp + " Hp";
+			hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
+			hpElement.innerHTML = currentHp + "/" + y + " Hp";
 			checksummon();
 			checkDamage();
 			}
@@ -5627,8 +5639,8 @@ document.getElementById("throw").classList.add("stonethrow");
             currentHp2 -= MagicDamage;  // Schaden anwenden
 			}
 			}
-            hp2Element.innerHTML = currentHp2 + " Hp";  // HP-Wert aktualisieren
-            hpElement.innerHTML = currentHp + " Hp";
+            hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";  // HP-Wert aktualisieren
+            hpElement.innerHTML = currentHp + "/" + y + " Hp";
             console.log("Attack - currentHp2:", currentHp2);  // Debug-Ausgabe
             
             checkDamage();  // Überprüfen und anzeigen von Schaden
@@ -5658,8 +5670,8 @@ document.getElementById("throw").classList.add("stonethrow");
 			}
 			currentHp3 -= 1;
 			}
-			hp3Element.innerHTML = currentHp3 + " Hp";
-			hpElement.innerHTML = currentHp + " Hp";
+			hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
+			hpElement.innerHTML = currentHp + "/" + y + " Hp";
 			checksummon();
 			checkDamage();
 			}
@@ -5706,7 +5718,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageDungelenemy * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -5715,7 +5727,7 @@ function aiAction(remindercrit_chance) {
 		checkdefeat();
 		} else {
 		currentHp -= DamageDungelenemy;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -5726,7 +5738,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageDungelenemy * 2);
-	  hp4Element.innerHTML = currentHp4 + " Hp";
+	  hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -5735,7 +5747,7 @@ function aiAction(remindercrit_chance) {
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageDungelenemy;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -5748,7 +5760,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageDungelenemy * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -5757,7 +5769,7 @@ function aiAction(remindercrit_chance) {
 		checkdefeat();
 		} else {
 		currentHp -= DamageDungelenemy;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -5790,7 +5802,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageDungelBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -5799,7 +5811,7 @@ function aiAction(remindercrit_chance) {
 		checkdefeat();
 		} else {
 		currentHp -= DamageDungelBoss;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -5810,7 +5822,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageDungelBoss * 2);
-	  hp4Element.innerHTML = currentHp4 + " Hp";
+	  hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -5819,7 +5831,7 @@ function aiAction(remindercrit_chance) {
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageDungelBoss;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -5832,7 +5844,7 @@ function aiAction(remindercrit_chance) {
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageDungelBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -5841,7 +5853,7 @@ function aiAction(remindercrit_chance) {
 		checkdefeat();
 		} else {
 		currentHp -= DamageDungelBoss;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -5862,18 +5874,18 @@ function aiAction(remindercrit_chance) {
 	poisen2++;
 	if (yousummon == 0) {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat();
 	} else {
 	if (wahl > 0.5) {
 	currentHp4 -= DamageDungelBoss;
-	hp4Element.innerHTML = currentHp4 + " Hp";
+	hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	checkDamage();
 	checkyousummon();
 	} else {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat()
 	}
@@ -5889,23 +5901,24 @@ function aiAction(remindercrit_chance) {
  if (action > 0.5) {
   console.log(action)
   attack_name.innerHTML = "Gift Pflanzen";
+  sword2.classList.add("up");
 	document.getElementById("flower").classList.remove("hidden");
 	document.getElementById("flower").classList.add("plant_grow");
 	poisen2++;
 	if (yousummon == 0) {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat()
 	} else {
 	if (wahl > 0.5) {
 	currentHp4 -= DamageDungelBoss;
-	hp4Element.innerHTML = currentHp4 + " Hp";
+	hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	checkDamage();
 	checkyousummon();
 	} else {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat()
 	}
@@ -5915,16 +5928,19 @@ function aiAction(remindercrit_chance) {
           document.getElementById("flower").classList.remove("plant_grow");
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  sword2.classList.remove("up");
         }, 1000);
 		//Totem
 	} else if (summontotem == 0) {
 	attack_name.innerHTML = "Beschwöre Totem der Heilung";
+	sword2.classList.add("up");
 	summontotem++;
 	document.getElementById("totem").classList.remove("hidden");
-	document.getElementById("table").style.top = 60%
+	document.getElementById("table").style.top = "60%";
 	setTimeout(() => {
 		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
+		  sword2.classList.remove("up");
         }, 1000);
 	} else {
 	attack_name.innerHTML = "Gift Pflanzen";
@@ -5933,18 +5949,18 @@ function aiAction(remindercrit_chance) {
 	poisen2++;
 	if (yousummon == 0) {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat()
 	} else {
 	if (wahl > 0.5) {
 	currentHp4 -= DamageDungelBoss;
-	hp4Element.innerHTML = currentHp4 + " Hp";
+	hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	checkDamage();
 	checkyousummon();
 	} else {
 	currentHp -= DamageDungelBoss;
-	hpElement.innerHTML = currentHp + " Hp";
+	hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	checkDamage();
 	checkdefeat()
 	}
@@ -5961,6 +5977,7 @@ function aiAction(remindercrit_chance) {
   if (progress != 13) {
   if (progress == 6) {
   // Großer Boss
+  console.log("action = " + action)
         if (action > 0.4) {
 		attack_name.innerHTML = "Slash";
 		if (Easy == true) {
@@ -5973,7 +5990,7 @@ timer = -1;
   id = setInterval(frame2, 1);
   function frame2() {
   timer--;
-  console.log("Timer = " + timer)
+  //console.log("Timer = " + timer)
   if (timer == 0) {
   document.getElementById("blocken").classList.remove("hidden");
   }
@@ -5986,7 +6003,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -5995,7 +6012,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		}
 		}
 		} else {
@@ -6004,7 +6021,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageBoss * 2);
-	  hp4Element.innerHTML = currentHp4 + " Hp";
+	  hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6013,7 +6030,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageBoss;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6023,7 +6040,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6032,7 +6049,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-		hpElement.innerHTML = currentHp + " Hp";
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		}
 		}
 	  }
@@ -6053,7 +6070,7 @@ timer = -1;
     }
   } 
   document.getElementById("hidden2").classList.remove("hidden");
-} else if (action < 0.2) {
+} else if (action > 0.2) {
 attack_name.innerHTML = "Erdbeben";
 function createStone(topPosition) {
     const stone = document.createElement('div');
@@ -6101,7 +6118,7 @@ function bossAction() {
 					document.getElementById("crit2").classList.remove("hidden");
 					document.getElementById("crit2").classList.add("damage-animation");
 					currentHp -= (Damageenemy * 2);
-					hpElement.innerHTML = currentHp + " Hp";
+					hpElement.innerHTML = currentHp + "/" + y + " Hp";
 					setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6110,7 +6127,7 @@ function bossAction() {
 					checkdefeat();
 					} else {
 					currentHp -= Damageenemy;
-                    hpElement.innerHTML = currentHp + " Hp";
+                    hpElement.innerHTML = currentHp + "/" + y + " Hp";
 					checkDamage();
 					checkdefeat();
 					}
@@ -6122,9 +6139,9 @@ function bossAction() {
 					document.getElementById("crit2").classList.remove("hidden");
 					document.getElementById("crit2").classList.add("damage-animation");
 					currentHp4 -= (Damageenemy * 2);
-					hp4Element.innerHTML = currentHp4 + " Hp";
+					hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 					currentHp -= (Damageenemy * 2);
-					hpElement.innerHTML = currentHp + " Hp";
+					hpElement.innerHTML = currentHp + "/" + y + " Hp";
 					setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6137,9 +6154,9 @@ function bossAction() {
 					checkdefeat();
 					} else {
 					currentHp4 -= Damageenemy;
-					hp4Element.innerHTML = currentHp4 + " Hp";
+					hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 					currentHp -= Damageenemy;
-                    hpElement.innerHTML = currentHp + " Hp";
+                    hpElement.innerHTML = currentHp + "/" + y + " Hp";
 					checkDamage();
 					checkdefeat();
 					checkDamage();
@@ -6166,14 +6183,107 @@ bossAction();
 
 document.getElementById("hidden2").classList.remove("hidden");
 } else {
+if (x - 2 != currentHp2 && x - 1 != currentHp2) {
 attack_name.innerHTML = "Blockwater";
 currentHp2 += 2;
-  hp2Element.innerHTML = currentHp2 + " Hp";
+  hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
   checkDamage();
   document.getElementById("blackBlock").classList.remove("highlight");
+  document.getElementById("redBlock").classList.add("highlight");
+  document.getElementById("hidden2").classList.remove("hidden");
+  } else {
+  attack_name.innerHTML = "Slash";
+		if (Easy == true) {
+timer = 81;
+} else if (Normal == true) {
+timer = 131;
+} else if (Hard == true) {
+timer = -1;
+}
+  id = setInterval(frame2, 1);
+  function frame2() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  }
+   if (pos2 == 400) {
+      clearInterval(id);
+      sword2.classList.add("swing2");
+      if (yousummon == 0) {
+	  if (!defending) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit2").classList.remove("hidden");
+	  document.getElementById("crit2").classList.add("damage-animation");
+	  currentHp -= (DamageBoss * 2);
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
+	  setTimeout (() => {
+			document.getElementById("crit2").classList.add("hidden");
+			document.getElementById("crit2").classList.remove("damage-animation");
+			}, 1000);
+		checkDamage();
+		checkdefeat();
+		} else {
+		currentHp -= DamageBoss;
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
+		}
+		}
+		} else {
+		if (wahl > 0.5) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit3").classList.remove("hidden");
+	  document.getElementById("crit3").classList.add("damage-animation2");
+	  currentHp4 -= (DamageBoss * 2);
+	  hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
+	  setTimeout (() => {
+			document.getElementById("crit3").classList.add("hidden");
+			document.getElementById("crit3").classList.remove("damage-animation2");
+			}, 1000);
+		checkDamage();
+		checkyousummon();
+		} else {
+		currentHp4 -= DamageBoss;
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
+		checkDamage();
+		checkyousummon();
+		}
+      } else {
+	  if (!defending) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit2").classList.remove("hidden");
+	  document.getElementById("crit2").classList.add("damage-animation");
+	  currentHp -= (DamageBoss * 2);
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
+	  setTimeout (() => {
+			document.getElementById("crit2").classList.add("hidden");
+			document.getElementById("crit2").classList.remove("damage-animation");
+			}, 1000);
+		checkDamage();
+		checkdefeat();
+		} else {
+		currentHp -= DamageBoss;
+		hpElement.innerHTML = currentHp + "/" + y + " Hp";
+		}
+		}
+	  }
+	  }
+      setTimeout(() => {
+        elem2.classList.add("move-back3");
+        setTimeout(() => {
+          elem2.style.left = '150px';
+          elem2.classList.remove("move-back3");
+          sword2.classList.remove("swing2");
+		  document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
-		  document.getElementById("hidden2").classList.remove("hidden");
-		  
+        }, 1000);
+      }, 500);
+    } else {
+      pos2++;
+      elem2.style.left = pos2 + 'px';
+    }
+  } 
+  document.getElementById("hidden2").classList.remove("hidden");
+  }
   }
   // normaler Gegner
 } else {
@@ -6201,7 +6311,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (Damageenemy * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6210,7 +6320,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= Damageenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6239,7 +6349,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (Damageenemy * 2);
-	  hp4Element.innerHTML = currentHp4 + " Hp";
+	  hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6248,7 +6358,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= Damageenemy;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6258,7 +6368,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (Damageenemy * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6267,7 +6377,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= Damageenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6320,7 +6430,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6329,7 +6439,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6340,7 +6450,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageBoss * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6349,7 +6459,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageBoss;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6359,7 +6469,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-	  hpElement.innerHTML = currentHp + " Hp";
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
 	  setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6368,7 +6478,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6417,7 +6527,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6426,7 +6536,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6437,7 +6547,7 @@ timer = -1;
 		document.getElementById("crit3").classList.remove("hidden");
 		document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageBoss * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6446,7 +6556,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageBoss;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6456,7 +6566,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6465,7 +6575,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6491,12 +6601,112 @@ timer = -1;
       }, 1800);
   } else {
   attack_name.innerHTML = "Blockwater";
+  if (x - 3 != currentHp2 && x - 2 != currentHp2 && x - 1 != currentHp2) {
   currentHp2 += 4;
-  hp2Element.innerHTML = currentHp2 + " Hp";
+  hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
   checkDamage();
   document.getElementById("blackBlock").classList.remove("highlight");
 		  document.getElementById("redBlock").classList.add("highlight");
 		  document.getElementById("hidden2").classList.remove("hidden");
+  } else {
+  if (Easy == true) {
+timer = 31;
+} else if (Normal == true) {
+timer = 81;
+} else if (Hard == true) {
+timer = -1;
+}
+  id = setInterval(frame5, 1);
+  function frame5() {
+  timer--;
+  console.log("Timer = " + timer)
+  if (timer == 0) {
+  document.getElementById("blocken").classList.remove("hidden");
+  defend();
+  }
+   if (pos2 == 350) {
+      clearInterval(id);
+      sword2.classList.add("slash");
+	  sword3.classList.add("slash");
+      if (yousummon == 0) {
+	  if (!defending) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit2").classList.remove("hidden");
+	  document.getElementById("crit2").classList.add("damage-animation");
+	  currentHp -= (DamageBoss * 2);
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
+	  setTimeout (() => {
+			document.getElementById("crit2").classList.add("hidden");
+			document.getElementById("crit2").classList.remove("damage-animation");
+			}, 1000);
+		checkDamage();
+		checkdefeat();
+		} else {
+		currentHp -= DamageBoss;
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
+		checkDamage();
+		checkdefeat();
+		}
+		}
+		} else {
+		if (wahl > 0.5) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit3").classList.remove("hidden");
+	  document.getElementById("crit3").classList.add("damage-animation2");
+	  currentHp4 -= (DamageBoss * 2);
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
+		setTimeout (() => {
+			document.getElementById("crit3").classList.add("hidden");
+			document.getElementById("crit3").classList.remove("damage-animation2");
+			}, 1000);
+		checkDamage();
+		checkyousummon();
+		} else {
+		currentHp4 -= DamageBoss;
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
+		checkDamage();
+		checkyousummon();
+		}
+      } else {
+	  if (!defending) {
+	  if (chance < 0.05) {
+	  document.getElementById("crit2").classList.remove("hidden");
+	  document.getElementById("crit2").classList.add("damage-animation");
+	  currentHp -= (DamageBoss * 2);
+	  hpElement.innerHTML = currentHp + "/" + y + " Hp";
+	  setTimeout (() => {
+			document.getElementById("crit2").classList.add("hidden");
+			document.getElementById("crit2").classList.remove("damage-animation");
+			}, 1000);
+		checkDamage();
+		checkdefeat();
+		} else {
+		currentHp -= DamageBoss;
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
+		checkDamage();
+		checkdefeat();
+		}
+		}
+	  }
+	  }
+      setTimeout(() => {
+        elem2.classList.add("move-back5");
+        setTimeout(() => {
+          elem2.style.left = '150px';
+          elem2.classList.remove("move-back5");
+          sword2.classList.remove("slash");
+		  sword3.classList.remove("slash")
+		  document.getElementById("blackBlock").classList.remove("highlight");
+		  document.getElementById("redBlock").classList.add("highlight");
+        }, 1000);
+      }, 500);
+    } else {
+      pos2++;
+      elem2.style.left = pos2 + 'px';
+    }
+  } 
+  document.getElementById("hidden2").classList.remove("hidden");
+  }
   }
   }
   } else if (progress == 20 || progress == 27) {
@@ -6527,7 +6737,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= 4;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6536,7 +6746,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= 2;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6547,7 +6757,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= 2;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6556,7 +6766,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= 1;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6569,7 +6779,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
       document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= 4;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6578,7 +6788,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= 2;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6587,7 +6797,7 @@ timer = -1;
 		document.getElementById("crit3").classList.remove("hidden");
 		document.getElementById("crit3").classList.add("damage-animation2");
 		currentHp4 -= 2;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6596,7 +6806,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= 1;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6608,7 +6818,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= 4;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6617,7 +6827,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= 2;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6628,7 +6838,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= 2;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6637,7 +6847,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= 1;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6693,7 +6903,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6702,7 +6912,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6713,7 +6923,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterenemy * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6722,7 +6932,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6735,7 +6945,7 @@ timer = -1;
 		document.getElementById("crit3").classList.remove("hidden");
 		document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageWaterBoss * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6744,7 +6954,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageWaterBoss;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6754,7 +6964,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageWaterenemy * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6763,7 +6973,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageWaterenemy;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6776,7 +6986,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6785,7 +6995,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6796,7 +7006,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterenemy * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6805,7 +7015,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6855,7 +7065,7 @@ timer = -1;
 		  } else {
 	currentHp3 = summonHp + 2;
 	}
-	hp3Element.innerHTML = (currentHp3) + " Hp";
+	hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
 	console.log(currentHp3)
 	summon++;
 	} else {
@@ -6887,7 +7097,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6896,7 +7106,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6907,7 +7117,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageWaterenemy * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -6916,7 +7126,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageWaterenemy;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -6926,7 +7136,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterBoss * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6935,7 +7145,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterBoss;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -6990,7 +7200,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterenemy * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -6999,7 +7209,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -7010,7 +7220,7 @@ timer = -1;
 	  document.getElementById("crit3").classList.remove("hidden");
 	  document.getElementById("crit3").classList.add("damage-animation2");
 	  currentHp4 -= (DamageWaterenemy * 2);
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit3").classList.add("hidden");
 			document.getElementById("crit3").classList.remove("damage-animation2");
@@ -7019,7 +7229,7 @@ timer = -1;
 		checkyousummon();
 		} else {
 		currentHp4 -= DamageWaterenemy;
-        hp4Element.innerHTML = currentHp4 + " Hp";
+        hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 		checkDamage();
 		checkyousummon();
 		}
@@ -7029,7 +7239,7 @@ timer = -1;
 	  document.getElementById("crit2").classList.remove("hidden");
 	  document.getElementById("crit2").classList.add("damage-animation");
 	  currentHp -= (DamageWaterenemy * 2);
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		setTimeout (() => {
 			document.getElementById("crit2").classList.add("hidden");
 			document.getElementById("crit2").classList.remove("damage-animation");
@@ -7038,7 +7248,7 @@ timer = -1;
 		checkdefeat();
 		} else {
 		currentHp -= DamageWaterenemy;
-        hpElement.innerHTML = currentHp + " Hp";
+        hpElement.innerHTML = currentHp + "/" + y + " Hp";
 		checkDamage();
 		checkdefeat();
 		}
@@ -7089,6 +7299,7 @@ timer = -1;
   burnfc();
   //checkDamage();
   checkVictory(remindercrit_chance);
+  attackgegner1 = false;
   if (Damageboost == 2 || Damageboost == 3 || Damageboost == 4) {
   Damageboost--;
   } else if (Damageboost == 1) {
@@ -7109,21 +7320,29 @@ timer = -1;
   console.log(button_id)
 	buffReset = false;
 	checkDamage();
-	}, 1000);
+	}, 1500);
 	if (summontotem == 1) {
 	attack_name.innerHTML = "Heilung";
+	if (x - 4 != currentHp2 && x - 3 != currentHp2 && x - 2 != currentHp2 && x - 1 != currentHp2) {
 	currentHp2 += 5;
-	hp2Element.innerHTML = currentHp2 + " Hp";
+	hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
 	checkDamage();
+	} else {
+	currentHp2 += x - currentHp2;
+	hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
+	checkDamage();
+	}
 	}
   }
    
 function Regen() {
 if (ring == 1) {
+if (y != currentHp) {
 if (talent6_unlock == 1) {
 currentHp += Healing + 1;
 } else {
 currentHp += Healing;
+}
 }
 document.getElementById("Regenerationtxt").classList.remove("hidden");
 document.getElementById("Regenerationtxt").classList.add("damage-animation");
@@ -7132,7 +7351,7 @@ document.getElementById("Regenerationtxt").classList.remove("damage-animation");
 document.getElementById("Regenerationtxt").classList.add("hidden");
 }, 1000);
 document.getElementById("statsregeneration").innerHTML = "Regeneration: " + Healing + " Heilung";
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 }
 }
   
@@ -7140,10 +7359,10 @@ function Poisen(wahl) {
 if (poisen == 1) {
 if (summon == 0) {
 currentHp2 -= 1;
-hp2Element.innerHTML = currentHp2 + "Hp";
+hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
 } else {
 currentHp3 -= 1;
-hp3Element.innerHTML = currentHp3 + " Hp";
+hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
 }
 document.getElementById("poisenttxt").classList.remove("hidden");
 document.getElementById("poisenttxt").classList.add("damage-animation");
@@ -7157,7 +7376,7 @@ poisen--;
 if (poisen2 >= 1) {
 if (yousummon == 0) {
 currentHp -= poisen2;
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 document.getElementById("poisenttxt2").classList.remove("hidden");
 document.getElementById("poisenttxt2").classList.add("damage-animation");
 setTimeout (() => {
@@ -7168,7 +7387,7 @@ document.getElementById("statspoisen").innerHTML = "Gift: " + poisen2 + " Damage
 } else {
 if (wahl > 0.5) {
 currentHp4 -= poisen2;
-hp4Element.innerHTML = currentHp4 + " Hp";
+hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 document.getElementById("poisenttxt3").classList.remove("hidden");
 document.getElementById("poisenttxt3").classList.add("damage-animation3");
 setTimeout (() => {
@@ -7177,7 +7396,7 @@ document.getElementById("poisenttxt3").classList.add("hidden");
 }, 1000);
 } else {
 currentHp -= poisen2;
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 document.getElementById("poisenttxt2").classList.remove("hidden");
 document.getElementById("poisenttxt2").classList.add("damage-animation");
 setTimeout (() => {
@@ -7194,10 +7413,12 @@ function Regenerationfc() {
     if (RegenerationTime > 0) {
         if (Regeneration > 0) {
             document.getElementById("blackBlock").classList.add("plus-sign");
+			if (x != currentHp2) {
             currentHp2 += 1;
-            hp2Element.innerHTML = currentHp2 + " Hp";
+            hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
             console.log(Regeneration);
             checkDamage();
+			}
 			document.getElementById("Regenerationtxt2").classList.remove("hidden");
 			document.getElementById("Regenerationtxt2").classList.add("damage-animation");
 			setTimeout (() => {
@@ -7219,11 +7440,11 @@ if (Bleeding > 0) {
 document.getElementById("Bleed").classList.remove("hidden");
 if (summon == 0) {
   currentHp2 -= 1;
-  hp2Element.innerHTML = currentHp2 + " Hp";
+  hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
   checkDamage();
   } else {
   currentHp3 -= 1;
-  hp3Element.innerHTML = currentHp3 + " Hp";
+  hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
   }
 document.getElementById("Bleedtxt").classList.remove("hidden");
 document.getElementById("Bleedtxt").classList.add("damage-animation");
@@ -7263,10 +7484,10 @@ if (burntime > 0) {
 if (burn > 0) {
 if (summon == 0) {
 currentHp2 -= 1;
-hp2Element.innerHTML = currentHp2 + " Hp";
+hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
 } else {
 currentHp3 -= 1;
-hp3Element.innerHTML = currentHp3 + " Hp";
+hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
 }
 document.getElementById("burntxt").classList.remove("hidden");
 document.getElementById("burntxt").classList.add("damage-animation");
@@ -7297,7 +7518,7 @@ function checkdefeat() {
 if (currentHp <= 0) {
 if (revive == 1) {
 currentHp += 5;
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 document.getElementById("statuetxt").classLit.remove("hidden");
 setTimeout (() => {
 document.getElementById("statuetxt").classLit.add("hidden");
@@ -7468,6 +7689,7 @@ var chance3 = getRandomChance3();
 	  document.getElementById("gotGem").innerHTML = "";
 	  }
 	  score++;
+	  x++;
   }
 }
 
@@ -10090,7 +10312,7 @@ document.getElementById("angry").classList.remove("damage-animation");
 document.getElementById("angry").classList.add("hidden");
 }, 1000);
 }
-hpElement.innerHTML = currentHp + " Hp";
+hpElement.innerHTML = currentHp + "/" + y + " Hp";
 checkDamage();
 Blockwater--;
 onetimeuse();
@@ -10169,7 +10391,7 @@ if (spellId === 'spellcast') {
 //document.getElementById("redBlock").classList.add("hidden");
 document.getElementById("brownBlock").classList.remove("hidden");
 currentHp4 = summonHp + MagicDamage;
-hp4Element.innerHTML = currentHp4 + " Hp";
+hp4Element.innerHTML = currentHp4 + "/" + (MagicDamage + summonHp) + " Hp";
 yousummon++;
 console.log(yousummon)
 spellTime = 10;
@@ -10186,7 +10408,7 @@ if (progress >= 14 && progress <= 27 && MagicDamageon == true) {
 currentHp2 -= 2 + MagicDamage - 2;
 } else {
 currentHp2 -= 2 + MagicDamage;
-hp2Element.innerHTML = currentHp2 + " Hp";
+hp2Element.innerHTML = currentHp2 + "/" + x + " Hp";
 }
 checkDamage();
 burntime++;
@@ -10196,7 +10418,7 @@ turn2 = 2;
 spellTimer();
 } else {
 currentHp3 -= 2 + MagicDamage;
-hp3Element.innerHTML = currentHp3 + " Hp";
+hp3Element.innerHTML = currentHp3 + "/" + (2 + summonHp) + " Hp";
 checkDamage();
 burntime++;
 burn++;
@@ -12103,7 +12325,7 @@ if (MagicRGem == 1) {
 
 function zerstöre_totem() {
 document.getElementById("gegnerwahl").style.display = 'none';
-document.getElementById("table").style.top = 80%
+document.getElementById("table").style.top = "80%";
 document.getElementById("totem").classList.add("hidden");
 summontotem--;
 aiAction();
