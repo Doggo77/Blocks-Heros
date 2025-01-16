@@ -3873,7 +3873,7 @@
 			</div>
 			<div class="warhammer-container" id="warhammer-container" style="height: 0px;">
 				<div class="warhammer" id="warhammer">
-					<div class="tooltip">(Hammer) + 3 Angriff und Chance auf Betäubung (500 Gold)</div>
+					<div class="tooltip">(Hammer) + 3 Angriff und Chance auf Betäubung (600 Gold)</div>
 					<button class="buy-button" id="buyButton15" onclick="buy('buyButton15')">Kaufen</button>
 				</div>
 				<div class="warhammer-hover"></div>
@@ -4946,8 +4946,6 @@
 		</div>
 		<div class="popup" id="commingsoon" style="top: 100px; left: 25%;">
 			<div>coming soon:</div>
-			<div>Hammer Angriffs Animations bug fix</div>
-			<div>Hammer Design bug fix</div>
 			<div>Mehr Talente</div>
 			<div>Töne z.b: Schlag sound, Kauf sound, ...</div>
 			<div>Welt 4</div>
@@ -11063,8 +11061,8 @@
 					alert("Nicht genug Gold!");
 				}
 			} else if (buttonId === 'buyButton15') {
-				if (currentGold >= 500) { // Überprüfe, ob genug Gold vorhanden ist
-					updateGold(-500);
+				if (currentGold >= 600) { // Überprüfe, ob genug Gold vorhanden ist
+					updateGold(-600);
 					Warhammer++;
 				} else {
 					alert("Nicht genug Gold!");
