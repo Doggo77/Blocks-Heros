@@ -5535,6 +5535,12 @@
 		let Gemswitch14 = true;
 		let Gemswitch15 = true;
 
+
+		const password = prompt("Bitte Passwort eingeben:");
+ 		if (password !== "FürKoi") {
+    			document.body.innerHTML = "Falsches Passwort";
+  		}
+		
 		document.addEventListener("keydown", (event) => {
 			if (event.key === "Escape") {
 				document.getElementById("Einstellungen").style.display = 'block';
