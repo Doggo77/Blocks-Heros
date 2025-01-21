@@ -1268,6 +1268,11 @@
 			left: 30px;
 			top: -10px;
 		}
+		
+		.red-block .critdagger {
+			left: 10px;
+			top: 50px;
+		}
 
 		.Bleedshop {
 			position: absolute;
@@ -3259,6 +3264,61 @@
 			z-index: 0;
 			/* Ensure it is under the heart */
 		}
+		
+		.critdagger {
+			transform: rotate(-45deg);
+			position: absolute;
+			top: 150px;
+			left: 1250px;
+			width: 10px;
+			height: 30px;
+			background-color: silver;
+			box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+				0 0 20px rgba(255, 255, 255, 0.6),
+				0 0 30px rgba(255, 255, 255, 0.4);
+		}
+        .critdagger:before {
+			content: '';
+			position: absolute;
+			bottom: 30px;
+			left: 50%;
+			width: 5px;
+			height: 10px;
+			border-radius: 10px 10px 20px 20px;
+			border-left: 20px solid transparent;
+			border-right: 20px solid transparent;
+			border-bottom: 70px solid black;
+			transform: translateX(-50%);
+		}
+
+		.critdagger:after {
+			content: '';
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			width: 15px;
+			height: 15px;
+			background-color: black;
+			border-radius: 50%;
+			transform: translateX(-50%);
+		}
+		
+		.critdagger-container:hover .tooltip {
+			visibility: visible;
+			opacity: 1;
+		}
+		
+		.critdagger-hover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 50px;
+			/* Matches heart width */
+			height: 120px;
+			/* Matches heart height */
+			z-index: 0;
+			/* Ensure it is under the heart */
+		}
 	</style>
 </head>
 
@@ -3275,7 +3335,9 @@
 			<div style="font-size: 18px; border: 1px solid black;">Liste der items:</div>
 			<div id="craftstone" style="font-size: 18px;"></div>
 			<div id="craftwood" style="font-size: 18px;"></div>
+			<div id="craftflower" style="font-size: 18px;"></div>
 			<div id="craftleather" style="font-size: 18px;"></div>
+			<div id="craftcole" style="font-size: 18px;"></div>
 			<div id="craftiron" style="font-size: 18px;"></div>
 			<div id="craftGem" style="font-size: 18px;"></div>
 		</div>
@@ -3371,7 +3433,9 @@
 			<div style="font-size: 18px; border: 1px solid black;">Liste der items:</div>
 			<div id="craftstone3" style="font-size: 18px;"></div>
 			<div id="craftwood3" style="font-size: 18px;"></div>
+			<div id="craftflower3" style="font-size: 18px;"></div>
 			<div id="craftleather3" style="font-size: 18px;"></div>
+			<div id="craftcole3" style="font-size: 18px;"></div>
 			<div id="craftiron3" style="font-size: 18px;"></div>
 			<div id="craftGem3" style="font-size: 18px;"></div>
 		</div>
@@ -3873,10 +3937,17 @@
 			</div>
 			<div class="warhammer-container" id="warhammer-container" style="height: 0px;">
 				<div class="warhammer" id="warhammer">
-					<div class="tooltip">(Hammer) + 3 Angriff und Chance auf Betäubung (600 Gold)</div>
+					<div class="tooltip">(Hammer) + 3 Angriff und Chance auf Betäubung (800 Gold)</div>
 					<button class="buy-button" id="buyButton15" onclick="buy('buyButton15')">Kaufen</button>
 				</div>
 				<div class="warhammer-hover"></div>
+			</div>
+			<div class="critdagger-container" id="critdagger-container" style="height: 0px; transform: rotate(45deg);">
+				<div class="critdagger" id="critdagger">
+					<div class="tooltip">(Dagger) + 2 Angriff und Crit Chance erhöht (500 Gold)</div>
+					<button class="buy-button" id="buyButton16" onclick="buy('buyButton16')">Kaufen</button>
+				</div>
+				<div class="critdagger-hover"></div>
 			</div>
 		</div>
 		<button id="switchbutton" class="prev hidden" onclick="shopswitch('itemback')">Ausrüstung</button>
@@ -4144,7 +4215,9 @@
 			<div style="font-size: 18px; border: 1px solid black; font-weight: bold;">Liste der items:</div>
 			<div id="craftstone2" style="font-size: 18px; font-weight: bold;"></div>
 			<div id="craftwood2" style="font-size: 18px; font-weight: bold;"></div>
+			<div id="craftflower2" style="font-size: 18px; font-weight: bold;"></div>
 			<div id="craftleather2" style="font-size: 18px; font-weight: bold;"></div>
+			<div id="craftcole2" style="font-size: 18px; font-weight: bold;"></div>
 			<div id="craftiron2" style="font-size: 18px; font-weight: bold;"></div>
 			<div id="craftGem2" style="font-size: 18px; font-weight: bold;"></div>
 		</div>
@@ -4927,6 +5000,31 @@
 					<div class="" id="infotxtgem3" style="border: 1px solid black"><br>Kann kein Magiegem tragen</div>
 				</div>
 			</div>
+			<div class="canyoucraft" style="width: 20%;">
+				<div class="hidden" id="equipart16" style="border: 1px solid black;">Kritisches Messer</div>
+			</div>
+			<div class="canyoucraft2 hidden" id="equipGem16" style="position: absolute; left: 20%; top: 0%; width: 49%;">
+				<div class="canyoucraft4" style="width: 50%;">
+					<div style="border: 1px solid black;">
+						<div class="showGem"></div>
+					</div>
+					<div class="" id="infotxtgem" style="border: 1px solid black"><br>+ 1 Angriff wenn Ausgerüstet</div>
+					<button id="einsetzen43" onclick="Gemausgerüstetstärke = 14, einsetzen('Stärke')"
+						style="position: relative; top: 80%; left: 40%;">Einbauen</button>
+				</div>
+				<div class="canyoucraft3" style="position: absolute; left: 50%; top: 0px; width: 50%;">
+					<div style="border: 1px solid black;">
+						<div class="showGem2"></div>
+					</div>
+					<div class="" id="infotxtgem2" style="border: 1px solid black"><br>Kann kein Lebensgem tragen</div>
+				</div>
+				<div class="canyoucraft5" style="position: absolute; left: 100%; top: -1px; width: 63%;">
+					<div style="border: 1px solid black;">
+						<div class="showGem3"></div>
+					</div>
+					<div class="" id="infotxtgem3" style="border: 1px solid black"><br>Kann kein Magiegem tragen</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -4934,18 +5032,23 @@
 		<div class="popup" id="updatelog" style="top: 100px; left: 75%;">
 			<div>Update:</div>
 			<div>Bug fix</div>
-			<div>Gegner verschwinden nicht wenn sie Gegner rufen</div>
-			<div>Zauber Gegner Wahl</div>
 			<div>Neue Waffe Kriegs Hammer im Shop</div>
 			<div>Buff und Debuffs Stapelbar</div>
-			<div>Einstellungs Menü (nich nicht einstellbar)</div>
+			<div>Einstellungs Menü (nicht einstellbar)</div>
 			<div>Buff und Debuff beschreibungen bei den Einstellungen zu finden</div>
 			<div>Tastenbelegung für Verteidigen</div>
 			<div>Neues Schwert Design</div>
 			<div>Neuer Status Effekt</div>
+			<div>Neues Item Blumen</div>
+			<div>Neues Item Kohle</div>
+			<div>Neue Waffe Kritisches Messer im Shop</div>
 		</div>
 		<div class="popup" id="commingsoon" style="top: 100px; left: 25%;">
 			<div>coming soon:</div>
+			<div>Blumen im Shop zu Kaufen</div>
+			<div>Natur Element zum Craften</div>
+			<div>Kohle im Shop zu Kaufen</div>
+			<div>Dunkles Element zum Craften</div>
 			<div>Mehr Talente</div>
 			<div>Töne z.b: Schlag sound, Kauf sound, ...</div>
 			<div>Welt 4</div>
@@ -5162,7 +5265,8 @@
 			<div id="Poisensword" style="border: 1px solid black;"></div>
 			<div id="Magicwand" style="border: 1px solid black;"></div>
 			<div id="Firewand" style="border: 1px solid black;"></div>
-			<div id="Warhammer" style="border: 1px solid black"></div>
+			<div id="Warhammer" style="border: 1px solid black;"></div>
+			<div id="Critdagger" style="border: 1px solid black;"></div>
 		</div>
 		<div class="popup3" id="change3" style="top: 70%; left: 50%;">
 			<div id="Woodshield" style="border: 1px solid black;"></div>
@@ -5225,6 +5329,7 @@
 		<button onclick="nextLevel()">Weiter</button>
 	</div>
 
+<!--Einstellungen-->
 	<div class="popup7" id="Einstellungen">
 		<button onclick="back()">back</button>
 		<div style="font-size: 30px;">Einstellungen</div><br>
@@ -5237,6 +5342,7 @@
 		</div><br>
 	</div>
 
+<!--Effekt Beschreibungen-->
 	<div class="popup8" id="Effekte">
 		<button onclick="back()">back</button>
 		<div>1. Blut:<br><br>Fügt 1 Schaden zu, pro runde ein Blut weniger, unendlich Stapelbar</div><br>
@@ -5255,7 +5361,8 @@
 		<div>9. Dornen:<br><br>(Noch nicht im Spiel) Der Angreifer bekommt Schaden pro Stapel Dornen wenn der
 			Verteidiger Dornen hat, Stapel gehen nicht runter, unendlich Stapelbar</div><br>
 		<div>10. Frost:<br><br>(Noch nicht in Spiel) Fügt 1 Schaden zu, - 1 Angriff pro Stapel, pro runde ein Frost
-			weniger, unendlich Stapelbar </div><br>
+			weniger, unendlich Stapelbar</div><br>
+		<div>11. Säubern:<br><br>(Noch nicht im Spiel) Säubert eine Negativen Effekt auf dir, pro Negativen Effekt - 1 Stapel Säubern, unendlich Stapelbar</div><br>
 	</div>
 
 	<script>
@@ -5283,7 +5390,7 @@
 
 		//Level
 		let level = 1;
-		const maxLevels = 100;
+		const maxLevels = 120;
 		var progress = 0; //fortschritt
 
 		//rounds
@@ -5378,6 +5485,8 @@
 		let DamageWaterBoss = 3;
 		let DamageDungelenemy = 8;
 		let DamageDungelBoss = 9;
+		let DamageStaturenemy = 10;
+		let DamageDiebenemy = 9;
 
 		//crit
 		let crit_damage = c * 2;
@@ -5411,7 +5520,9 @@
 		//Craft
 		let craftstone = 0;
 		let craftwood = 0;
+		let craftflower = 0;
 		let craftleather = 0;
+		let craftcole = 0;
 		let craftiron = 0;
 		let craftGem = 0;
 		let selectednumber = 0;
@@ -5420,6 +5531,8 @@
 		let selectednumber3;
 
 		//Ausrüsten und Craft
+		let Critdagger = 0;
+		let critdaggerequip = 0;
 		let Warhammer = 0;
 		let Magichut = 0;
 		let Magicrobe = 0;
@@ -5490,6 +5603,7 @@
 		let Gemequip1 = 0;
 		let Gemart = 0;
 		let BleedGem = 0;
+		let critdaggerGem = 0;
 		let PoisenGem = 0;
 		let JacketGem = 0;
 		let ShieldWGem = 0;
@@ -5532,13 +5646,13 @@
 		let Gemswitch13 = true;
 		let Gemswitch14 = true;
 		let Gemswitch15 = true;
-
+		let Gemswitch16 = true;
 
 		const password = prompt("Bitte Passwort eingeben:");
  		if (password !== "FürKoi") {
     			document.body.innerHTML = "Falsches Passwort";
   		}
-		
+
 		document.addEventListener("keydown", (event) => {
 			if (event.key === "Escape") {
 				document.getElementById("Einstellungen").style.display = 'block';
@@ -6025,6 +6139,9 @@
 									}
 									if (Warhammer == 1) {
 										document.getElementById("equipart15").classList.remove("hidden");
+									}
+									if (Critdagger == 1) {
+										document.getElementById("equipart16").classList.remove("hidden");
 									}
 								}
 								document.getElementById("wayContainer").classList.add("hidden");
@@ -8875,6 +8992,20 @@
 			document.getElementById("craftwood3").style.border = '1px solid black';
 			document.getElementById("craftwood").style.border = '1px solid black';
 			document.getElementById("craftwood2").style.border = '1px solid black';
+			
+			document.getElementById("craftflower").innerHTML = craftflower + " Blume";
+			document.getElementById("craftflower2").innerHTML = craftflower + " Blume";
+			document.getElementById("craftflower3").innerHTML = craftflower + " Blume";
+			document.getElementById("craftflower3").style.border = '1px solid black';
+			document.getElementById("craftflower").style.border = '1px solid black';
+			document.getElementById("craftflower2").style.border = '1px solid black';
+			
+			document.getElementById("craftcole").innerHTML = craftcole + " Kohle";
+			document.getElementById("craftcole2").innerHTML = craftcole + " Kohle";
+			document.getElementById("craftcole3").innerHTML = craftcole + " Kohle";
+			document.getElementById("craftcole3").style.border = '1px solid black';
+			document.getElementById("craftcole").style.border = '1px solid black';
+			document.getElementById("craftcole2").style.border = '1px solid black';
 		}
 
 		function checkVictory(remindercrit_chance) {
@@ -8952,27 +9083,37 @@
 					console.log(chance)
 				}
 				console.log(chance)
-				if (chance <= 0.05) {
+				if (chance <= 0.01) {
 					craftGem++;
 					document.getElementById("items").innerHTML = "+ 1 Edelstein erhalten";
 					checkMaterial();
 
-				} else if (chance <= 0.15) {
+				} else if (chance <= 0.05) {
 					craftiron++;
 					document.getElementById("items").innerHTML = "+ 1 Eisen erhalten";
 					checkMaterial();
 
-				} else if (chance <= 0.3) {
+				} else if (chance <= 0.13) {
 					craftleather++;
 					document.getElementById("items").innerHTML = "+ 1 Leder erhalten";
 					checkMaterial();
-
-				} else if (chance <= 0.5) {
+				
+				} else if (chance <= 0.28) {
+					craftcole++;
+					document.getElementById("items").innerHTML = "+ 1 Kohle erhalten";
+					checkMaterial();
+				
+				} else if (chance <= 0.48) {
+					craftflower++;
+					document.getElementById("items").innerHTML = "+ 1 Blume erhalten";
+					checkMaterial();
+					
+				} else if (chance <= 0.73) {
 					craftstone++;
 					document.getElementById("items").innerHTML = "+ 1 Stein erhalten";
 					checkMaterial();
 
-				} else if (chance <= 0.75) {
+				} else if (chance <= 1.03) {
 					craftwood++;
 					document.getElementById("items").innerHTML = "+ 1 Holz erhalten";
 					checkMaterial();
@@ -9168,6 +9309,15 @@
 				buyButton15.style.display = 'block'; // Zeigt den Kaufen-Button an
 			} else {
 				buyButton15.style.display = 'none'; // Versteckt den Kaufen-Button
+			}
+		});
+		
+		document.querySelector('#critdagger').addEventListener('click', function () {
+			var buyButton16 = document.getElementById('buyButton16');
+			if (buyButton16.style.display === 'none' || buyButton16.style.display === '') {
+				buyButton16.style.display = 'block'; // Zeigt den Kaufen-Button an
+			} else {
+				buyButton16.style.display = 'none'; // Versteckt den Kaufen-Button
 			}
 		});
 
@@ -9587,6 +9737,8 @@
 				document.getElementById("sword").classList.remove("Feuerstab");
 			} else if (Warhammerequip == 1) {
 				document.getElementById("sword").classList.remove("warhammer");
+			} else if (critdaggerequip == 1) {
+				document.getElementById("sword").classList.remove("critdagger");
 			} else {
 				document.getElementById("sword").classList.remove("sword");
 			}
@@ -9606,6 +9758,9 @@
 				if (Warhammerequip == 1 && WarhammerGem == 1) {
 					c--;
 				}
+				if (critdaggerequip == 1 && critdaggerGem == 1) {
+					c--;
+				}
 			} else {
 				document.getElementById("Gemart2").innerHTML = "";
 			}
@@ -9614,6 +9769,57 @@
 			Magicwandequip = 0;
 			Firewandequip = 0;
 			Warhammerequip = 0;
+			critdaggerequip= 0;
+		});
+		
+		document.querySelector('#Critdagger').addEventListener('click', function () {
+			document.getElementById("change2").style.display = 'none';
+			document.getElementById("Schwert").innerHTML = "Kritisches Messer";
+			document.getElementById("Schwertinfo").innerHTML = "+ 2 Anriff und 10% mehr Crit Chance";
+			if (Poisenswordequip == 1) {
+				document.getElementById("sword").classList.remove("Poisensword");
+			} else if (Magicwandequip == 1) {
+				document.getElementById("sword").classList.remove("Magiestabklein");
+			} else if (Firewandequip == 1) {
+				document.getElementById("sword").classList.remove("Feuerstab");
+			} else if (Warhammerequip == 1) {
+				document.getElementById("sword").classList.remove("warhammer");
+			} else if (Bleedingswordequip == 1) {
+				document.getElementById("sword").classList.remove("Bleedshop");
+			} else {
+				document.getElementById("sword").classList.remove("sword");
+			}
+			document.getElementById("sword").classList.add("critdagger");
+			critdaggerequip++;
+			c += 2;
+			crit_chance += 0.10;
+			if (critdaggerGem == 1) {
+				document.getElementById("Gemart2").innerHTML = "+ 1 Angriff durch Stärke Gem";
+				c++;
+				if (Poisenswordequip == 1 && PoisenGem == 1) {
+					c--;
+				}
+				if (Magicwandequip == 1 && MagicWGem == 1) {
+					MagicDamage--;
+				}
+				if (Firewandequip == 1 && FirewandGem == 1) {
+					MagicDamage--;
+				}
+				if (Warhammerequip == 1 && WarhammerGem == 1) {
+					c--;
+				}
+				if (Bleedingswordequip == 1 && BleedGem == 1) {
+					c--;
+				}
+			} else {
+				document.getElementById("Gemart2").innerHTML = "";
+			}
+			Bleedingswordequip = 0;
+			Poisenswordequip = 0;
+			Magicwandequip = 0;
+			Firewandequip = 0;
+			Warhammerequip = 0;
+			critdaggerequip = 1;
 		});
 
 		document.querySelector('#Magicwand').addEventListener('click', function () {
@@ -9628,6 +9834,8 @@
 				document.getElementById("sword").classList.remove("Feuerstab");
 			} else if (Warhammerequip == 1) {
 				document.getElementById("sword").classList.remove("warhammer");
+			} else if (critdaggerequip == 1) {
+				document.getElementById("sword").classList.remove("critdagger");
 			} else {
 				document.getElementById("sword").classList.remove("sword");
 			}
@@ -9647,6 +9855,9 @@
 				if (Warhammerequip == 1 && WarhammerGem == 1) {
 					c--;
 				}
+				if (critdaggerequip == 1 && critdaggerGem == 1) {
+					c--;
+				}
 			} else {
 				document.getElementById("Gemart2").innerHTML = "";
 			}
@@ -9655,6 +9866,7 @@
 			Magicwandequip = 1;
 			Firewandequip = 0;
 			Warhammerequip = 0;
+			critdaggerequip = 0;
 			MagicDamage += 2;
 			console.log("Magie Schaden = " + MagicDamage)
 		});
@@ -9910,6 +10122,8 @@
 				document.getElementById("sword").classList.remove("Poisensword");
 			} else if (Firewandequip == 1) {
 				document.getElementById("sword").classList.remove("Feuerstab");
+			} else if (critdaggerequip == 1) {
+				document.getElementById("sword").classList.remove("critdagger");
 			} else {
 				document.getElementById("sword").classList.remove("sword");
 			}
@@ -9932,6 +10146,9 @@
 				if (Firewandequip == 1 && FirewandGem == 1) {
 					MagicDamage--;
 				}
+				if (critdaggerequip == 1 && critdaggerGem == 1) {
+					c--;
+				}
 			} else {
 				document.getElementById("Gemart2").innerHTML = "";
 			}
@@ -9942,6 +10159,7 @@
 			Magicarmourequip = 0;
 			Firewandequip = 0;
 			Warhammerequip = 1;
+			critdaggerequip = 0;
 		});
 
 		document.querySelector('#Firewand').addEventListener('click', function () {
@@ -9956,6 +10174,8 @@
 				document.getElementById("sword").classList.remove("Poisensword");
 			} else if (Warhammerequip == 1) {
 				document.getElementById("sword").classList.remove("warhammer");
+			} else if (critdaggerequip == 1) {
+				document.getElementById("sword").classList.remove("critdagger");
 			} else {
 				document.getElementById("sword").classList.remove("sword");
 			}
@@ -9979,6 +10199,9 @@
 				if (Warhammerequip == 1 && WarhammerGem == 1) {
 					c--;
 				}
+				if (critdaggerequip == 1 && critdaggerGem == 1) {
+					c--;
+				}
 			} else {
 				document.getElementById("Gemart2").innerHTML = "";
 			}
@@ -9989,6 +10212,7 @@
 			Magicarmourequip = 0;
 			Firewandequip = 1;
 			Warhammerequip = 0;
+			critdaggerequip = 0;
 		});
 
 		document.querySelector('#Poisensword').addEventListener('click', function () {
@@ -10003,6 +10227,8 @@
 				document.getElementById("sword").classList.remove("Feuerstab");
 			} else if (Warhammerequip == 1) {
 				document.getElementById("sword").classList.remove("warhammer");
+			} else if (critdaggerequip == 1) {
+				document.getElementById("sword").classList.remove("critdagger");
 			} else {
 				document.getElementById("sword").classList.remove("sword");
 			}
@@ -10022,6 +10248,9 @@
 				if (Warhammerequip == 1 && WarhammerGem == 1) {
 					c--;
 				}
+				if (critdaggerequip == 1 && critdaggerGem == 1) {
+					c--;
+				}
 			} else {
 				document.getElementById("Gemart2").innerHTML = "";
 			}
@@ -10030,6 +10259,7 @@
 			Magicarmourequip = 0;
 			Firewandequip = 0;
 			Warhammerequip = 0;
+			critdaggerequip = 0;
 		});
 
 		document.querySelector('#necklace2').addEventListener('click', function () {
@@ -10642,6 +10872,24 @@
 				console.log(Gemswitch15)
 			}
 		});
+		
+		document.querySelector('#equipart16').addEventListener('click', function () {
+			if (Gemswitch16 == true) {
+				document.getElementById("equipart16").style.backgroundColor = 'rgb(210, 210, 210)';
+				document.getElementById("equipGem16").classList.remove("hidden");
+				if (DamageGem >= 1) {
+					document.getElementById("einsetzen43").disabled = false;
+				} else {
+					document.getElementById("einsetzen43").disabled = true;
+				}
+				Gemswitch16 = false;
+			} else if (Gemswitch16 == false) {
+				document.getElementById("equipart16").style.backgroundColor = '';
+				document.getElementById("equipGem16").classList.add("hidden");
+				Gemswitch16 = true;
+				console.log(Gemswitch16)
+			}
+		});
 
 		if (progress != 4 && progress != 12 && progress != 18) {
 			document.querySelectorAll('.leather-texture').forEach(element => {
@@ -10731,7 +10979,6 @@
 		}
 
 		function buy(buttonId) {
-
 			if (buttonId === 'buyButton') {
 				if (currentGold >= buymore) { // Überprüfe, ob genug Gold vorhanden ist
 					updateGold(-buymore);
@@ -11061,9 +11308,18 @@
 					alert("Nicht genug Gold!");
 				}
 			} else if (buttonId === 'buyButton15') {
-				if (currentGold >= 600) { // Überprüfe, ob genug Gold vorhanden ist
-					updateGold(-600);
+				if (currentGold >= 800) { // Überprüfe, ob genug Gold vorhanden ist
+					updateGold(-800);
 					Warhammer++;
+					document.getElementById("warhammer-container").classList.add("hidden");
+				} else {
+					alert("Nicht genug Gold!");
+				}
+			} else if (buttonId === 'buyButton16') {
+				if (currentGold >= 500) { // Überprüfe, ob genug Gold vorhanden ist
+					updateGold(-500);
+					Critdagger++;
+					document.getElementById("critdagger-container").classList.add("hidden");
 				} else {
 					alert("Nicht genug Gold!");
 				}
@@ -12397,7 +12653,8 @@
 					Poisensword: "Gift Schwert",
 					Magicwand: "Magiestab",
 					Firewand: "Feuerstab",
-					Warhammer: "Kriegs Hammer"
+					Warhammer: "Kriegs Hammer",
+					Critdagger: "Kritisches Messer"
 				};
 
 				// Status der Ausrüstungsgegenstände
@@ -12406,7 +12663,8 @@
 					Poisensword: Poisensword,
 					Magicwand: Magicwand,
 					Firewand: Firewand,
-					Warhammer: Warhammer
+					Warhammer: Warhammer,
+					Critdagger: Critdagger
 				};
 
 				// Alle Items durchlaufen und DOM aktualisieren
@@ -12438,6 +12696,14 @@
 					c -= 3;
 					stunnaktiv--;
 					if (WarhammerGem == 1) {
+						c--;
+					}
+				}
+				
+				if (critdaggerequip == 1) {
+					c += 2;
+					crit_chance += 0.10;
+					if (critdaggerGem == 1) {
 						c--;
 					}
 				}
@@ -13127,7 +13393,20 @@
 				if (WarhammerGem == 1) {
 					document.getElementById("einsetzen42").disabled = true;
 				}
-			}
+			
+			} else if (einsetzenId === 'Stärke' && Gemausgerüstetstärke == 14) {
+				DamageGem--;
+				updateGem();
+				critdaggerGem++;
+				if (critdaggerequip == 1) {
+					critdaggerequip--;
+					c -= 2;
+					crit_chance -= 0.10;
+				}
+				if (critdaggerGem == 1) {
+					document.getElementById("einsetzen43").disabled = true;
+				}
+			} 
 
 			if (einsetzenId === 'Leben' && Gemausgerüstetleben == 1) {
 				y++;
